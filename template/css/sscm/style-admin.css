@@ -10,10 +10,10 @@ Red: 	rgb(188,10,41)
 
 
 */
-@import url('fontfaces.css');
+/* @import url('fontfaces.css');
 *{
 	font-family: "Soberana-Regular";
-}
+} */
 a{
 	text-decoration: none;
 	color: inherit;
@@ -131,4 +131,11 @@ h1, h2, h3, h4, h5, h6{
 .align-horizontal {
 	float: left;
 	position: relative
+}
+.no-margin {
+	margin: 0%;
+}
+
+.margin2{
+	margin-right: 0.05%;
 }

@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" href="<?= base_url('assets/media/logos/logo_square.jpg') ?>">
-	<title>[Admin] ISSSTE Colima</title>
+	<title>Santa Fe Uniformes</title>
 	<?php $this->load->view("sscm/base/head.php") ?>
 	
 </head>
@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		<div class="row">
 			<nav class="col navbar navbar-expand-lg navbar-dark bg-dark">
-				<a class="navbar-brand" href="<?= base_url('index.php/admin/panel') ?>">Santa Fe Uniformes</a>
+				<a class="navbar-brand" href="<?= base_url('index.php/sscm/cpanel') ?>">Santa Fe Uniformes</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
