@@ -45,8 +45,9 @@ class CustomerModel extends CI_Model{
     }
 
     public function update($data){
+        $this->db->set($data);
         $this->db->where('id_cliente', $data['id_cliente']);
-        return $this->db->update('clientes', $Clientes);
+        return $this->db->update('Clientes');
     }
 
 

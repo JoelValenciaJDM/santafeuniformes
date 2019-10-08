@@ -8,7 +8,7 @@
 	<?php endif; ?>
 	<div class="card p-4">
 		<form action ="<?php echo base_url("index.php/ajax/updateCustomer")?>" method="post" id="form">
-		<input type="hidden"  name="id_liente"  value="<?= htmlentities($Customer->id_cliente) ?>"  required>
+		<input type="hidden"  name="id_cliente"  value="<?= htmlentities($Customer->id_cliente) ?>"  required>
 		<table class="w-100">
 			<tr>
 				<td class="d-md-table-cell d-none"><label for="name">Nombre Cliente:</label></td>
@@ -50,4 +50,5 @@
 </div>
 
 <script src="<?php echo base_url('index.php/../template/js/ajax.js')?>"></script>
+
 
