@@ -18,10 +18,9 @@ class Ajax extends CI_Controller {
          $dato = $_POST['data']; 
          parse_str($dato, $data);
          var_dump ($data);
-         echo $data;
          
          
-         $this->customerModel->update($data);
+         $this->CustomerModel->update($data);
         //  $this->customerModel->update($data);
 
      }

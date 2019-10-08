@@ -1,4 +1,4 @@
-<?php $this->load->view("sscm/base/header.php") ?>
+<?php $this->load->view("sscm/base/headerpag.php") ?>
 
 <div class="container">
 	<h2>Cliente</h2>
