@@ -44,8 +44,8 @@
 			<h2><i class="fa fa-edit"></i> Maquila</h2>
 		</div>
 		<div class="row">
-			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/admin/medical/new') ?>"><div><i class="far fa-sticky-note fa-2x"></i><br>Nueva Maquila</div></a>
-			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/admin/medical/list') ?>"><div><i class="far fa-edit fa-2x"></i><br>Administrar Maquila</div></a>
+			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/sscm/maquila/newMaquila') ?>"><div><i class="far fa-sticky-note fa-2x"></i><br>Nueva Maquila</div></a>
+			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/sscm/maquila/listMaquila') ?>"><div><i class="far fa-edit fa-2x"></i><br>Administrar Maquila</div></a>
 		</div>
 		<?php endif; ?>
 		<?php if(in_array("cut", $rights)): ?>
