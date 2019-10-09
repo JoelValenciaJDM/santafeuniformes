@@ -21,3 +21,28 @@ $("#form").submit(function(event){
 		// $("#server-results").html(response);
 	});
 });
+
+$("#delate").click(function(event){
+	console.log("holi");
+	alertify.confirm("¿Eliminar cliente de los registros?",
+  		function(){
+			var form_data = $("#form").serialize();
+			$.ajax({
+				url : "../deleteData",
+				type: "POST",
+				data : {data: form_data},
+				success: () => {
+					location.href="../listCustomer";
+					alertify.success("Se hicieron los cambios");
+					
+				}
+				
+			});
+			alertify.success('Ok');
+			
+  		},
+  function(){
+    alertify.error('Cancel');
+  }).set('labels', {ok:'Aceptar', cancel:'Cancelar'}).setHeader('ALERTA!');
+
+});

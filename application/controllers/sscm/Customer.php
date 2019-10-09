@@ -63,10 +63,22 @@ echo $this->pagination->create_links();
   }
 
   
-  public function updateCustomer($id_cliente){
-    $this->CustomerModel->update($_POST['name'],$_POST['lastname'],$_POST['second_lastname'], $_POST['enterprice'],
-    $_POST['rfc'], $_POST['email'], $_POST['phone'] );
+  // public function updateCustomer($id_cliente){
+  //   $this->CustomerModel->update($_POST['name'],$_POST['lastname'],$_POST['second_lastname'], $_POST['enterprice'],
+  //   $_POST['rfc'], $_POST['email'], $_POST['phone'] );
 
-   }
+  //  }
 
+  public function deleteData(){
+    $data = array();
+    $dato = $_POST['data']; 
+    echo $dato;
+    parse_str($dato, $data);
+    // var_dump ($data);
+      
+    $this->CustomerModel->deleteData($data);
+
+    redirect(base_url('index.php/sscm/customer/listcustomer'),'refresh');
+    
+  }
 }

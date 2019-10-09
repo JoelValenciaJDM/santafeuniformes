@@ -23,7 +23,7 @@ class CustomerModel extends CI_Model{
    }  
 
    public function loadCustomers(){
-    return $customers=json_encode($this->db->query('SELECT * FROM Clientes')->result_array());
+    return $customers=json_encode($this->db->query('SELECT * FROM Clientes WHERE status = 0')->result_array());
    }
 
    public function getCustomer($id_cliente){
@@ -50,6 +50,18 @@ class CustomerModel extends CI_Model{
         return $this->db->update('Clientes');
     }
 
+    public function deleteData($data){
+        $send = array();
+        $id_cliente = $data['id_cliente'];
+         var_dump ($data);
+
+        $send = array(
+            'status'=> 1
+        );
+        $this->db->set($send);
+        $this->db->where('id_cliente', $id_cliente);
+        $this->db->update('Clientes');
+    }
 
   }
   ?>
