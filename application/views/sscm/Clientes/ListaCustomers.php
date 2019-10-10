@@ -10,7 +10,7 @@
 			</div>
 	<div class="card p-4">
 		<?php echo form_open_multipart(base_url("index.php/sscm/Customer/create")); ?>
-      <table id="customers" class="w-100">
+      <table id="table" class="w-100">
 			<thead>
 					<tr>
 						<th>No. Cliente</th>
@@ -37,7 +37,7 @@
 </div>
 <script>
 $(document).ready(function() {
-    $('#customers').DataTable( {
+    $('#table').DataTable( {
         "pagingType": "full_numbers"
     } );
 } );

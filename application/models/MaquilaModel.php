@@ -26,8 +26,8 @@ class MaquilaModel extends CI_Model{
       
    }  
 
-   public function loadCustomers(){
-    return $customers=json_encode($this->db->query('SELECT * FROM Clientes WHERE status = 0')->result_array());
+   public function loadMaquilas(){
+    return $customers=json_encode($this->db->query('SELECT * FROM Maquilas WHERE status = 0')->result_array());
    }
 
    public function getCustomer($id_cliente){

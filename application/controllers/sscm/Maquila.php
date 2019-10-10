@@ -34,20 +34,16 @@ echo $this->pagination->create_links();
     $this->load->library('pagination');
 
     $data['error'] = '';
-    $data['customers'] = json_decode($this->CustomerModel->loadCustomers());
+    $data['maquilas'] = json_decode($this->MaquilaModel->loadMaquilas());
     
-    
-    $config['base_url'] = base_url().'index.php/sscm/customer/listCustomer';
-    $config['total_rows'] = count($data['customers']);
-    $config['per_page'] = 3;
-    $this->pagination->initialize($config);
+  
 
     // $data['page'] = $this->customerModel->getPagination($config['per_page'],$offset);
 
     $data = array_merge($data,$this->CpanelModel->loadData());
  
 
-    $this->load->view('sscm/Clientes/ListaCustomers', $data);
+    $this->load->view('sscm/Maquilas/listmaquila', $data);
    }  
 
    public function viewData($id_cliente){

@@ -9,26 +9,28 @@
 
 			</div>
 	<div class="card p-4">
-		<?php echo form_open_multipart(base_url("index.php/sscm/Customer/create")); ?>
-      <table id="customers" class="w-100">
+		<?php echo form_open_multipart(base_url("index.php/sscm/Maqilas/create")); ?>
+      <table id="table" class="w-100">
 			<thead>
 					<tr>
-						<th>No. Cliente</th>
-						<th>Nombre de cliente</th>
-						<th>Empresa</th>
-						<th>Telefono</th>
+						<th>No. Maquila</th>
+						<th>Apodo</th>
+						<th>Dirección</th>
+						<th>Teléfono</th>
+						<th>Celular</th>
 						<th>Acción</th>
 					</tr>
 				</thead>
 				<tbody>
-        	<?php foreach($customers as $customer): ?>
+        	<?php foreach($maquilas as $maquila): ?>
 			  		<tr>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($customer->id_cliente) ?></td>
-			  			<td><?= htmlentities($customer->name." ".$customer->lastname." ".$customer->second_lastname) ?></td>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($customer->enterprice) ?></td>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($customer->phone) ?></td>
+			  			<td class="d-md-table-cell d-none"><?= htmlentities($maquila->id_maquila) ?></td>
+			  			<td><?= htmlentities($maquila->apodo) ?></td>
+			  			<td class="d-md-table-cell d-none"><?= htmlentities($maquila->address) ?></td>
+			  			<td class="d-md-table-cell d-none"><?= htmlentities($maquila->phone) ?></td>
+			  			<td class="d-md-table-cell d-none"><?= htmlentities($maquila->celphone) ?></td>
 			  			<td>
-			  				<a href="<?= base_url('index.php/sscm/Customer/viewData/'.$customer->id_cliente) ?>" class="btn btn-success"><i class="fa fa-eye"></i> Ver detalles</a>
+			  				<a href="<?= base_url('index.php/sscm/Maquila/viewData/'.$maquila->id_maquila) ?>" class="btn btn-success"><i class="fa fa-eye"></i> Ver detalles</a>
 			  			</td>
 			  		</tr>
 		  		<?php endforeach; ?>
@@ -37,7 +39,7 @@
 </div>
 <script>
 $(document).ready(function() {
-    $('#customers').DataTable( {
+    $('#table').DataTable( {
         "pagingType": "full_numbers"
     } );
 } );
