@@ -25,7 +25,7 @@
 		</div>
 		<div class="row">
 			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/sscm/customer/newCustomer') ?>"><div><i class="far fa-calendar-plus fa-2x"></i><br>Nuevo Cliente</div></a>
-			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/sscm/customer/listCustomer') ?>"><div><i class="far fa-calendar-alt fa-2x"></i><br>Administrar Clientes</div></a>
+			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/sscm/customer/list') ?>"><div><i class="far fa-calendar-alt fa-2x"></i><br>Administrar Clientes</div></a>
 		</div>
 		<?php endif; ?>
 
@@ -45,7 +45,7 @@
 		</div>
 		<div class="row">
 			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/sscm/maquila/newMaquila') ?>"><div><i class="far fa-sticky-note fa-2x"></i><br>Nueva Maquila</div></a>
-			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/sscm/maquila/listMaquila') ?>"><div><i class="far fa-edit fa-2x"></i><br>Administrar Maquila</div></a>
+			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/sscm/maquila/list') ?>"><div><i class="far fa-edit fa-2x"></i><br>Administrar Maquila</div></a>
 		</div>
 		<?php endif; ?>
 		<?php if(in_array("cut", $rights)): ?>

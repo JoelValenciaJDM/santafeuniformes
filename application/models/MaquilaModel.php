@@ -30,8 +30,8 @@ class MaquilaModel extends CI_Model{
     return $customers=json_encode($this->db->query('SELECT * FROM Maquilas WHERE status = 0')->result_array());
    }
 
-   public function getCustomer($id_cliente){
-    return $this->db->query("SELECT * FROM Clientes WHERE id_cliente = $id_cliente ORDER BY id_cliente DESC")->row();
+   public function getMaquila($id_maquila){
+    return $this->db->query("SELECT * FROM Maquilas WHERE id_maquila = $id_maquila ORDER BY id_maquila DESC")->row();
     }
 
     public function search($search,$start = FALSE, $registers = FALSE){
@@ -50,21 +50,21 @@ class MaquilaModel extends CI_Model{
 
     public function update($data){
         $this->db->set($data);
-        $this->db->where('id_cliente', $data['id_cliente']);
-        return $this->db->update('Clientes');
+        $this->db->where('id_maquila', $data['id_maquila']);
+        return $this->db->update('Maquilas');
     }
 
     public function deleteData($data){
         $send = array();
-        $id_cliente = $data['id_cliente'];
+        $id_maquila = $data['id_maquila'];
          var_dump ($data);
 
         $send = array(
             'status'=> 1
         );
         $this->db->set($send);
-        $this->db->where('id_cliente', $id_cliente);
-        $this->db->update('Clientes');
+        $this->db->where('id_maquila', $id_maquila);
+        $this->db->update('Maquilas');
     }
 
   }

@@ -24,7 +24,7 @@ $("#form").submit(function(event){
 
 $("#delate").click(function(event){
 	console.log("holi");
-	alertify.confirm("¿Eliminar cliente de los registros?",
+	alertify.confirm("¿Eliminar los registros?",
   		function(){
 			var form_data = $("#form").serialize();
 			$.ajax({
@@ -32,7 +32,7 @@ $("#delate").click(function(event){
 				type: "POST",
 				data : {data: form_data},
 				success: () => {
-					location.href="../listCustomer";
+					location.href="../list";
 					alertify.success("Se hicieron los cambios");
 					
 				}

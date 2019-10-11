@@ -30,7 +30,7 @@ echo $this->pagination->create_links();
     redirect('sscm/cpanel','refresh');
    }
 
-   public function listMaquila(){
+   public function list(){
     $this->load->library('pagination');
 
     $data['error'] = '';
@@ -43,19 +43,19 @@ echo $this->pagination->create_links();
     $data = array_merge($data,$this->CpanelModel->loadData());
  
 
-    $this->load->view('sscm/Maquilas/listmaquila', $data);
+    $this->load->view('sscm/Maquilas/list', $data);
    }  
 
-   public function viewData($id_cliente){
-    $data['Customer'] = $this->CustomerModel->getCustomer($id_cliente);
+   public function viewData($id_maquila){
+    $data['Maquila'] = $this->MaquilaModel->getMaquila($id_maquila);
     $data = array_merge($data, $this->CpanelModel->loadData());
-    $this->load->view('sscm/Clientes/customer', $data);
+    $this->load->view('sscm/Maquilas/maquila', $data);
  }
 
-  public function editData($id_cliente){
-   $data['Customer'] = $this->CustomerModel->getCustomer($id_cliente);
-   $data = array_merge($data, $this->CpanelModel->loadData());
-   $this->load->view('sscm/Clientes/customeredit', $data);
+  public function editData($id_maquila){
+    $data['Maquila'] = $this->MaquilaModel->getMaquila($id_maquila);
+    $data = array_merge($data, $this->CpanelModel->loadData());
+   $this->load->view('sscm/Maquilas/maquilaedit', $data);
   }
 
   
@@ -67,14 +67,12 @@ echo $this->pagination->create_links();
 
   public function deleteData(){
     $data = array();
-    $dato = $_POST['data']; 
-    echo $dato;
-    parse_str($dato, $data);
+    parse_str($_POST['data'], $data);
     // var_dump ($data);
       
-    $this->CustomerModel->deleteData($data);
+    $this->MaquilaModel->deleteData($data);
 
-    redirect(base_url('index.php/sscm/customer/listcustomer'),'refresh');
+    redirect(base_url('index.php/sscm/maquilas/list'),'refresh');
     
   }
 }

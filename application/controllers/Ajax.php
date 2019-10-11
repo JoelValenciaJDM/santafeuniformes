@@ -8,18 +8,22 @@ class Ajax extends CI_Controller {
         parent::__construct();
 
         $this->load->model('CustomerModel');
+        $this->load->model('MaquilaModel');
     }
     public function index(){
         
     }
     public function updateCustomer() {
-
-         
-         
-         
+        // echo $data;
+        $data = array();
+        parse_str($_POST['data'], $data);
          $this->CustomerModel->update($data);
-        //  $this->customerModel->update($data);
-
      }
+
+    public function updateMaquila() { 
+        $data = array();
+        parse_str($_POST['data'], $data);  
+       $this->MaquilaModel->update($data);
+    }
 
 }

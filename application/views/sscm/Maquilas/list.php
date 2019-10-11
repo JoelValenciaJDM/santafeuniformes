@@ -1,7 +1,7 @@
 <?php $this->load->view("sscm/base/headerpag.php") ?>
 
 <div class="container">
-	<h2>Cliente</h2>
+	<h2>Maquilas</h2>
 	<?php if(!empty($error)): ?>
 	<p class="alert alert-danger"><?= htmlentities($error) ?></p>
 	<?php endif; ?>

@@ -30,14 +30,14 @@ echo $this->pagination->create_links();
     redirect('sscm/cpanel','refresh');
    }
 
-   public function listCustomer(){
+   public function list(){
     $this->load->library('pagination');
 
     $data['error'] = '';
     $data['customers'] = json_decode($this->CustomerModel->loadCustomers());
     
     
-    $config['base_url'] = base_url().'index.php/sscm/customer/listCustomer';
+    $config['base_url'] = base_url().'index.php/sscm/customer/list';
     $config['total_rows'] = count($data['customers']);
     $config['per_page'] = 3;
     $this->pagination->initialize($config);
@@ -47,7 +47,7 @@ echo $this->pagination->create_links();
     $data = array_merge($data,$this->CpanelModel->loadData());
  
 
-    $this->load->view('sscm/Clientes/ListaCustomers', $data);
+    $this->load->view('sscm/Clientes/list', $data);
    }  
 
    public function viewData($id_cliente){
@@ -78,7 +78,7 @@ echo $this->pagination->create_links();
       
     $this->CustomerModel->deleteData($data);
 
-    redirect(base_url('index.php/sscm/customer/listcustomer'),'refresh');
+    redirect(base_url('index.php/sscm/customer/list'),'refresh');
     
   }
 }
