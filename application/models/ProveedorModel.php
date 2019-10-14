@@ -30,8 +30,8 @@ class ProveedorModel extends CI_Model{
     return $customers=json_encode($this->db->query('SELECT * FROM Proveedores WHERE status = 0')->result_array());
    }
 
-   public function getCustomer($id_cliente){
-    return $this->db->query("SELECT * FROM Clientes WHERE id_cliente = $id_cliente ORDER BY id_cliente DESC")->row();
+   public function getProveedor($id_proveedor){
+    return $this->db->query("SELECT * FROM Proveedores WHERE id_proveedor = $id_proveedor ORDER BY id_proveedor DESC")->row();
     }
 
     public function search($search,$start = FALSE, $registers = FALSE){
@@ -50,21 +50,21 @@ class ProveedorModel extends CI_Model{
 
     public function update($data){
         $this->db->set($data);
-        $this->db->where('id_cliente', $data['id_cliente']);
-        return $this->db->update('Clientes');
+        $this->db->where('id_proveedor', $data['id_proveedor']);
+        return $this->db->update('Proveedores');
     }
 
     public function deleteData($data){
         $send = array();
-        $id_cliente = $data['id_cliente'];
+        $id_proveedor = $data['id_proveedor'];
          var_dump ($data);
 
         $send = array(
             'status'=> 1
         );
         $this->db->set($send);
-        $this->db->where('id_cliente', $id_cliente);
-        $this->db->update('Clientes');
+        $this->db->where('id_proveedor', $id_proveedor);
+        $this->db->update('Proveedores');
     }
 
   }

@@ -46,16 +46,16 @@ echo $this->pagination->create_links();
     $this->load->view('sscm/Proveedores/list', $data);
    }  
 
-   public function viewData($id_maquila){
-    $data['Maquila'] = $this->MaquilaModel->getMaquila($id_maquila);
+   public function viewData($id_proveedor){
+    $data['Proveedor'] = $this->ProveedorModel->getProveedor($id_proveedor);
     $data = array_merge($data, $this->CpanelModel->loadData());
-    $this->load->view('sscm/Maquilas/maquila', $data);
+    $this->load->view('sscm/Proveedores/proveedor', $data);
  }
 
-  public function editData($id_maquila){
-    $data['Maquila'] = $this->MaquilaModel->getMaquila($id_maquila);
+  public function editData($id_proveedor){
+    $data['Proveedor'] = $this->ProveedorModel->getProveedor($id_proveedor);
     $data = array_merge($data, $this->CpanelModel->loadData());
-   $this->load->view('sscm/Maquilas/maquilaedit', $data);
+   $this->load->view('sscm/Proveedores/proveedoredit', $data);
   }
 
   
@@ -70,9 +70,9 @@ echo $this->pagination->create_links();
     parse_str($_POST['data'], $data);
     // var_dump ($data);
       
-    $this->MaquilaModel->deleteData($data);
+    $this->ProveedorModel->deleteData($data);
 
-    redirect(base_url('index.php/sscm/maquilas/list'),'refresh');
+    redirect(base_url('index.php/sscm/proveedores/list'),'refresh');
     
   }
 }

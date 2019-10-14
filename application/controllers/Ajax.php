@@ -9,6 +9,7 @@ class Ajax extends CI_Controller {
 
         $this->load->model('CustomerModel');
         $this->load->model('MaquilaModel');
+        $this->load->model('ProveedorModel');
     }
     public function index(){
         
@@ -24,6 +25,12 @@ class Ajax extends CI_Controller {
         $data = array();
         parse_str($_POST['data'], $data);  
        $this->MaquilaModel->update($data);
+    }
+
+    public function updateProveedor() { 
+        $data = array();
+        parse_str($_POST['data'], $data);  
+       $this->ProveedorModel->update($data);
     }
 
 }
