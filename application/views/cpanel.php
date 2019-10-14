@@ -66,12 +66,13 @@
 			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/admin/banner/list') ?>"><div><i class="far fa-image fa-2x"></i><br>Banner</div></a>
 		</div>
 		<?php endif; ?>
-		<?php if(in_array("comments", $rights)): ?>
+		<?php if(in_array("Proveedores", $rights)): ?>
 		<div class="row panel-title">
-			<h2><i class="far fa-envelope"></i> Comentarios</h2>
+			<h2><i class="far fa-envelope"></i> Proveedores</h2>
 		</div>
 		<div class="row">
-			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/admin/comment') ?>"><div><i class="far fa-comment-alt fa-2x"></i><br>Ver comentarios</div></a>
+			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/sscm/proveedor/newProveedor') ?>"><div><i class="fa fa-user-plus fa-2x"></i><br>Crear proveedor</div></a>
+			<a class="col-md-6 col-sm-12 col-12 section" href="<?= base_url('index.php/sscm/proveedor/list') ?>"><div><i class="fa fa-users fa-2x"></i><br>Administrar proveedor</div></a>
 		</div>
 		<?php endif; ?>
 		<?php if(in_array("directories", $rights)): ?>
