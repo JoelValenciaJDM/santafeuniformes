@@ -1,5 +1,5 @@
 <?php
-class ProveedorModel extends CI_Model{
+class PrendaModel extends CI_Model{
 	public function __construct(){
     $this->load->model('User_model');
 
@@ -22,20 +22,24 @@ class ProveedorModel extends CI_Model{
       'cp' => $cp,
       'Phone1' => $Phone1,
       'Phone2'=> $Phone2,);
-      $this->db->insert('Proveedores',$data);
+      $this->db->insert('Wears',$data);
       
-   } 
-   
-   public function createAjax($data){
-       $this->db->insert('Proveedores',$data);
-   }
+   }  
 
    public function loadProveedores(){
     return $customers=json_encode($this->db->query('SELECT * FROM Proveedores WHERE status = 0')->result_array());
    }
 
-   public function getProveedor($id_proveedor){
-    return $this->db->query("SELECT * FROM Proveedores WHERE id_proveedor = $id_proveedor ORDER BY id_proveedor DESC")->row();
+   public function loadTipoPrenda(){
+    return $customers=json_encode($this->db->query('SELECT * FROM Tipos_prendas')->result_array());
+   }
+
+   public function loadWears(){
+    return $customers=json_encode($this->db->query('SELECT * FROM Wears WHERE status = 0')->result_array());
+   }
+
+   public function getProveedor($id_prenda){
+    return $this->db->query("SELECT * FROM Wears WHERE id_prenda = $id_prenda ORDER BY id_prenda DESC")->row();
     }
 
     public function search($search,$start = FALSE, $registers = FALSE){
@@ -54,21 +58,21 @@ class ProveedorModel extends CI_Model{
 
     public function update($data){
         $this->db->set($data);
-        $this->db->where('id_proveedor', $data['id_proveedor']);
-        return $this->db->update('Proveedores');
+        $this->db->where('id_prenda', $data['id_prenda']);
+        return $this->db->update('Wears');
     }
 
     public function deleteData($data){
         $send = array();
-        $id_proveedor = $data['id_proveedor'];
+        $id_prenda = $data['id_prenda'];
          var_dump ($data);
 
         $send = array(
             'status'=> 1
         );
         $this->db->set($send);
-        $this->db->where('id_proveedor', $id_proveedor);
-        $this->db->update('Proveedores');
+        $this->db->where('id_prenda', $id_prenda);
+        $this->db->update('Wears');
     }
 
   }

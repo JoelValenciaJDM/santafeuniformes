@@ -27,10 +27,18 @@ class Ajax extends CI_Controller {
        $this->MaquilaModel->update($data);
     }
 
+    public function createProveedor() { 
+        $data = array();
+        parse_str($_POST['data'], $data);  
+       $this->ProveedorModel->createAjax($data);
+    }
+
     public function updateProveedor() { 
         $data = array();
         parse_str($_POST['data'], $data);  
        $this->ProveedorModel->update($data);
     }
+
+
 
 }
