@@ -9,20 +9,13 @@ class PrendaModel extends CI_Model{
 
   }
 
-  Public function create($name, $rs, $rfc, $present, $address, $suburb, $state, $city, $cp, $Phone1, $Phone2 ){
+  Public function create($name, $gener, $id_proveedor, $id_tipo_prenda){
       $data = array(   
       'name'=> $name,
-      'rs'=>$rs,
-      'rfc'=> $rfc,
-      'present'=> $present,
-      'address' => $address,
-      'suburb' => $suburb,
-      'state'=> $state,
-      'city' => $city,
-      'cp' => $cp,
-      'Phone1' => $Phone1,
-      'Phone2'=> $Phone2,);
-      $this->db->insert('Wears',$data);
+      'gener'=>$gener,
+      'id_proveedor'=> $id_proveedor,
+      'id_tipos_prenda'=> $id_tipo_prenda);
+      $this->db->insert('Prendas',$data);
       
    }  
    public function createAjax($data){
@@ -43,8 +36,8 @@ class PrendaModel extends CI_Model{
     return $customers=json_encode($this->db->query('SELECT * FROM Tipos_prendas')->result_array());
    }
 
-   public function loadWears(){
-    return $customers=json_encode($this->db->query('SELECT * FROM Wears WHERE status = 0')->result_array());
+   public function loadProveedores(){
+    return $customers=json_encode($this->db->query('SELECT * FROM Proveedores WHERE status = 0')->result_array());
    }
 
    public function getWear($id_prenda){

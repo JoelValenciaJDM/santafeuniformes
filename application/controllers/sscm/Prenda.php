@@ -26,8 +26,7 @@ echo $this->pagination->create_links();
    }
 
    public function create(){
-    $this->WearModel->create($_POST['name'],$_POST['lastname'],$_POST['second_lastname'], $_POST['enterprice'],
-    $_POST['rfc'], $_POST['email'], $_POST['phone'] );
+    $this->PrendaModel->create($_POST['name'],$_POST['gener'],$_POST['id_proveedor'], $_POST['id_tipos_prendas']);
 
     redirect('sscm/cpanel','refresh');
    }
