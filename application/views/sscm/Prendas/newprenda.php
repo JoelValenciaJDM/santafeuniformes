@@ -60,7 +60,7 @@
 </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Proveedor-->
 <div class="modal" id="proveedorTrigger" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -129,6 +129,8 @@
   </div>
 </div>
 
+
+<!-- Modal Proveedor Clase de prenda-->
 <div class="modal" id="tipoprendaTrigger" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">

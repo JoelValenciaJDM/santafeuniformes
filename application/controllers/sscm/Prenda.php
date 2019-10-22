@@ -42,11 +42,12 @@ echo $this->pagination->create_links();
    public function viewData($id_prenda){
     $data['Wear'] = $this->PrendaModel->getWear($id_prenda);
     $data = array_merge($data, $this->CpanelModel->loadData());
-    $this->load->view('sscm/Clientes/wear', $data);
+    // var_dump ($this->PrendaModel->getWear($id_prenda));
+    $this->load->view('sscm/Prendas/prenda', $data);
  }
 
   public function editData($id_prenda){
-   $data['Wear'] = $this->WearModel->getWear($id_cliente);
+   $data['Wear'] = $this->PrendaModel->getWear($id_cliente);
    $data = array_merge($data, $this->CpanelModel->loadData());
    $this->load->view('sscm/Clientes/wearedit', $data);
   }

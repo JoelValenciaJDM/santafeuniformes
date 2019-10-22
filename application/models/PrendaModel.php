@@ -41,7 +41,11 @@ class PrendaModel extends CI_Model{
    }
 
    public function getWear($id_prenda){
-    return $this->db->query("SELECT * FROM Wears WHERE id_prenda = $id_prenda ORDER BY id_prenda DESC")->row();
+    return $this->db->query("SELECT Prendas.id_prenda, Prendas.name as prenda_name, Prendas.gener, Proveedores.name as proveedor_name, rs, rfc, present, address, suburb, state, city, cp, Phone1, Phone2, Tipos_prendas.name as tipoprenda_name
+                                FROM `Prendas` 
+                                    JOIN Proveedores on Proveedores.id_proveedor= Prendas.id_proveedor 
+                                        JOIN Tipos_prendas ON Prendas.id_tipos_prenda = Tipos_prendas.id_tipo_prenda
+                                            WHERE Prendas.id_prenda = $id_prenda")->row();
     }
 
     public function search($search,$start = FALSE, $registers = FALSE){
