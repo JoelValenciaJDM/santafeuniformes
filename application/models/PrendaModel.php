@@ -25,9 +25,18 @@ class PrendaModel extends CI_Model{
       $this->db->insert('Wears',$data);
       
    }  
+   public function createAjax($data){
+    $this->db->insert('Tipos_prendas',$data);
+}
 
-   public function loadProveedores(){
-    return $customers=json_encode($this->db->query('SELECT * FROM Proveedores WHERE status = 0')->result_array());
+   public function loadPrendas(){
+    return $customers=json_encode($this->db->query('SELECT Prendas.id_prenda, Prendas.name as prenda_name, Prendas.gener, Proveedores.name as proveedor_name, Tipos_prendas.name as tipoprenda_name
+                                                        FROM `Prendas` 
+                                                            JOIN Proveedores on Proveedores.id_proveedor= Prendas.id_proveedor 
+                                                                JOIN Tipos_prendas ON Prendas.id_tipos_prenda = Tipos_prendas.id_tipo_prenda
+                                                                    WHERE Prendas.status = 0
+                                                                        GROUP BY Prendas.id_prenda
+                                                    ')->result_array());
    }
 
    public function loadTipoPrenda(){
@@ -38,7 +47,7 @@ class PrendaModel extends CI_Model{
     return $customers=json_encode($this->db->query('SELECT * FROM Wears WHERE status = 0')->result_array());
    }
 
-   public function getProveedor($id_prenda){
+   public function getWear($id_prenda){
     return $this->db->query("SELECT * FROM Wears WHERE id_prenda = $id_prenda ORDER BY id_prenda DESC")->row();
     }
 
@@ -74,6 +83,11 @@ class PrendaModel extends CI_Model{
         $this->db->where('id_prenda', $id_prenda);
         $this->db->update('Wears');
     }
+    
+    public function getNewTipoPrenda(){
+        return $customers=json_encode($this->db->query('SELECT * FROM `Tipos_prendas` WHERE id_tipo_prenda = (SELECT max(id_tipo_prenda) FROM Tipos_prendas)')->result_array());
+       }
+    
 
   }
   ?>

@@ -33,27 +33,15 @@ echo $this->pagination->create_links();
    }
 
    public function list(){
-    $this->load->library('pagination');
-
-    $data['error'] = '';
-    $data['wears'] = json_decode($this->WearModel->loadWears());
-    
-    
-    $config['base_url'] = base_url().'index.php/sscm/wear/list';
-    $config['total_rows'] = count($data['wears']);
-    $config['per_page'] = 3;
-    $this->pagination->initialize($config);
-
-    // $data['page'] = $this->wearModel->getPagination($config['per_page'],$offset);
-
+  
+    $data['Wears'] = json_decode($this->PrendaModel->loadPrendas());
+    // echo ($this->PrendaModel->loadPrendas());
     $data = array_merge($data,$this->CpanelModel->loadData());
- 
-
-    $this->load->view('sscm/Clientes/list', $data);
+    $this->load->view('sscm/Prendas/list', $data);
    }  
 
-   public function viewData($id_cliente){
-    $data['Wear'] = $this->WearModel->getWear($id_cliente);
+   public function viewData($id_prenda){
+    $data['Wear'] = $this->PrendaModel->getWear($id_prenda);
     $data = array_merge($data, $this->CpanelModel->loadData());
     $this->load->view('sscm/Clientes/wear', $data);
  }

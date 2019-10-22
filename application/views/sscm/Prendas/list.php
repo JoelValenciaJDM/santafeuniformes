@@ -13,28 +13,29 @@
       <table id="table" class="w-100">
 			<thead>
 					<tr>
-						<th>No. proveedor</th>
-						<th>Nombre</th>
-						<th>Representante</th>
-						<th>Direcion</th>
-						<th>Estado</th>
-						<th>Telefono 1</th>
-						<th>Telefono 2</th>
+						<th>No. Prenda</th>
+						<th>Categoria</th>
+						<th>Prenda</th>
+						<th>Proveedor</th>
+						<th>Genero</th>
 						<th>Acción</th>
 					</tr>
 				</thead>
 				<tbody>
-        	<?php foreach($Proveedores as $proveedor): ?>
+        	<?php foreach($Wears as $wear): ?>
 			  		<tr>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($proveedor->id_proveedor) ?></td>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($proveedor->name) ?></td>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($proveedor->present) ?></td>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($proveedor->address) ?></td>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($proveedor->state) ?></td>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($proveedor->Phone1) ?></td>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($proveedor->Phone2) ?></td>
-			  			<td>
-			  				<a href="<?= base_url('index.php/sscm/proveedor/viewData/'.$proveedor->id_proveedor) ?>" class="btn btn-success"><i class="fa fa-eye"></i> Ver detalles</a>
+			  			<td class="d-md-table-cell d-none"><?= htmlentities($wear->id_prenda) ?></td>
+			  			<td class="d-md-table-cell d-none"><?= htmlentities($wear->tipoprenda_name) ?></td>
+			  			<td class="d-md-table-cell d-none"><?= htmlentities($wear->prenda_name) ?></td>
+			  			<td class="d-md-table-cell d-none"><?= htmlentities($wear->proveedor_name) ?></td>
+							<td class="d-md-table-cell d-none"><?php switch ($wear->gener): ?><?php case 0: echo("Caballero") ?><?php break;?>
+							<?php case 1: echo("Dama")?>
+							<?php break;?>
+							<?php case 2: echo("Unisex") ?>
+							<?php break;?>
+							<?php endswitch ?></td>
+							<td>
+			  				<a href="<?= base_url('index.php/sscm/prenda/viewData/'.$wear->id_prenda) ?>" class="btn btn-success"><i class="fa fa-eye"></i> Ver detalles</a>
 			  			</td>
 			  		</tr>
 		  		<?php endforeach; ?>

@@ -71,5 +71,10 @@ class ProveedorModel extends CI_Model{
         $this->db->update('Proveedores');
     }
 
+    public function getNewProveedor(){
+        return $customers=json_encode($this->db->query('SELECT * FROM `Proveedores` WHERE id_proveedor = (SELECT max(id_proveedor) FROM Proveedores)')->result_array());
+       }
+    
+
   }
   ?>
