@@ -41,7 +41,7 @@ class PrendaModel extends CI_Model{
    }
 
    public function getWear($id_prenda){
-    return $this->db->query("SELECT Prendas.id_prenda, Prendas.name as prenda_name, Prendas.gener, Proveedores.name as proveedor_name, rs, rfc, present, address, suburb, state, city, cp, Phone1, Phone2, Tipos_prendas.name as tipoprenda_name
+    return $this->db->query("SELECT Prendas.id_prenda, Prendas.name as prenda_name, Prendas.gener, Prendas.id_proveedor, Proveedores.name as proveedor_name, rs, rfc, present, address, suburb, state, city, cp, Phone1, Phone2, Tipos_prendas.name as tipoprenda_name, Prendas.id_tipos_prenda
                                 FROM `Prendas` 
                                     JOIN Proveedores on Proveedores.id_proveedor= Prendas.id_proveedor 
                                         JOIN Tipos_prendas ON Prendas.id_tipos_prenda = Tipos_prendas.id_tipo_prenda
@@ -78,7 +78,7 @@ class PrendaModel extends CI_Model{
         );
         $this->db->set($send);
         $this->db->where('id_prenda', $id_prenda);
-        $this->db->update('Wears');
+        $this->db->update('Prendas');
     }
     
     public function getNewTipoPrenda(){

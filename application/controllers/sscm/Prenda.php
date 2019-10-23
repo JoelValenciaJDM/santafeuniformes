@@ -47,9 +47,11 @@ echo $this->pagination->create_links();
  }
 
   public function editData($id_prenda){
-   $data['Wear'] = $this->PrendaModel->getWear($id_cliente);
+   $data['proveedores'] = json_decode($this->PrendaModel->loadProveedores());
+   $data['type_prendas'] =json_decode($this->PrendaModel->loadTipoPrenda());
+   $data['Wear'] = $this->PrendaModel->getWear($id_prenda);
    $data = array_merge($data, $this->CpanelModel->loadData());
-   $this->load->view('sscm/Clientes/wearedit', $data);
+   $this->load->view('sscm/Prendas/prendaedit', $data);
   }
 
   
@@ -66,7 +68,7 @@ echo $this->pagination->create_links();
     parse_str($dato, $data);
     // var_dump ($data);
       
-    $this->WearModel->deleteData($data);
+    $this->PrendaModel->deleteData($data);
 
     redirect(base_url('index.php/sscm/wear/list'),'refresh');
     
