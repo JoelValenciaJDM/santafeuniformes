@@ -1,0 +1,100 @@
+<?php
+class TelaModel extends CI_Model{
+	public function __construct(){
+    $this->load->model('User_model');
+
+  }
+  
+  public function index(){
+
+  }
+
+  Public function create($id_tela, $id_proveedor, $Metros, $Ancho, $Fecha_ingreso, $update_date, $Color){
+      $data = array(   
+      'id_tela'=> $id_tela,
+      'id_proveedor'=> $id_proveedor,
+      'Metros'=>$Metros,
+      'Ancho'=>$Ancho,
+      'Fecha_ingreso'=>$Fecha_ingreso,
+      'Fecha_modificacion'=>$update_date,
+      'Color'=> $Color);
+      $this->db->insert('Rollos_tela',$data);
+      
+   }  
+   public function createAjax($data){
+    $this->db->insert('Tipos_prendas',$data);
+}
+
+   public function loadRollos(){
+    return $customers=json_encode($this->db->query('SELECT COUNT(rt.id_rollo) as total_rollos, rt.id_tela, tt.Nombre as tela_name, SUM(rt.Metros) as total_metros, rt.Color
+                                                        FROM Rollos_tela as rt 
+                                                            JOIN Tipo_telas as tt ON rt.id_tela = tt.id_tela 
+                                                                WHERE rt.status = 0 and rt.Metros >= 1
+                                                                    GROUP BY rt.id_tela, rt.Color
+                                                    ')->result_array());
+   }
+   public function loadRollosEspesificos($id_tela, $color){
+    return $customers=json_encode($this->db->query("SELECT rt.id_rollo as total_rollos, rt.id_tela, tt.Nombre as tela_name, rt.Metros as total_metros, rt.Color
+                                                        FROM Rollos_tela as rt 
+                                                            JOIN Tipo_telas as tt ON rt.id_tela = tt.id_tela 
+                                                                WHERE rt.status = 0 and rt.id_tela = $id_tela and Color = '$color'
+                                                    ")->result_array());
+   }
+   
+
+   public function loadTelas(){
+    return $customers=json_encode($this->db->query('SELECT * FROM Tipo_telas JOIN Composiciones on Tipo_telas.composicion = id_composicion WHERE status = 0')->result_array());
+   }
+
+   public function loadProveedores(){
+    return $customers=json_encode($this->db->query('SELECT * FROM Proveedores WHERE status = 0')->result_array());
+   }
+
+   public function getWear($id_prenda){
+    return $this->db->query("SELECT Prendas.id_prenda, Prendas.name as prenda_name, Prendas.gener, Prendas.id_proveedor, Proveedores.name as proveedor_name, rs, rfc, present, address, suburb, state, city, cp, Phone1, Phone2, Tipos_prendas.name as tipoprenda_name, Prendas.id_tipos_prenda
+                                FROM `Prendas` 
+                                    JOIN Proveedores on Proveedores.id_proveedor= Prendas.id_proveedor 
+                                        JOIN Tipos_prendas ON Prendas.id_tipos_prenda = Tipos_prendas.id_tipo_prenda
+                                            WHERE Prendas.id_prenda = $id_prenda")->row();
+    }
+
+    public function search($search,$start = FALSE, $registers = FALSE){
+		$this->db->like("nombres",$search);
+		if ($start !== FALSE && $registers !== FALSE) {
+			$this->db->limit($registers,$start);
+		}
+		$query = $this->db->get("Clientes");
+		return $query->result();
+    }
+    
+    public function getPagination($limit,$offset){
+        $sql = $this->db->get('Clientes, $limit, $offset');
+        return $sql->reset();
+    }
+
+    public function update($data){
+        $this->db->set($data);
+        $this->db->where('id_prenda', $data['id_prenda']);
+        return $this->db->update('Wears');
+    }
+
+    public function deleteData($data){
+        $send = array();
+        $id_prenda = $data['id_prenda'];
+         var_dump ($data);
+
+        $send = array(
+            'status'=> 1
+        );
+        $this->db->set($send);
+        $this->db->where('id_prenda', $id_prenda);
+        $this->db->update('Prendas');
+    }
+    
+    public function getNewTipoPrenda(){
+        return $customers=json_encode($this->db->query('SELECT * FROM `Tipos_prendas` WHERE id_tipo_prenda = (SELECT max(id_tipo_prenda) FROM Tipos_prendas)')->result_array());
+       }
+    
+
+  }
+  ?>
