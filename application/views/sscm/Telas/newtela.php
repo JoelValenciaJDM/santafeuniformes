@@ -13,12 +13,12 @@
 				<td>
 					<div>
 						<div class="no-margin row">
-							<select id="selectList" type="text" class="form-control col-md-10 col-g-10 col-sm-10" type="text" name="id_tela" required>
+							<select id="selectListtipotela" type="text" class="form-control col-md-10 col-g-10 col-sm-10" type="text" name="id_tela" required>
 								<?php foreach($telas as $tela):?>
 								<option  value="<?= $tela->id_tela?>"><?=$tela->Nombre?></option>
 								<?php endforeach; ?>
 							</select>
-							<button type="button" class="btn btn-success  col-md-2 col-g-2 col-sm-2" data-backdrop="false"  data-toggle="modal" data-target="#proveedorTrigger"><i class="fa fa-save"></i>Proveedor</button>
+							<button type="button" class="btn btn-success  col-md-2 col-g-2 col-sm-2" data-backdrop="false"  data-toggle="modal" data-target="#tipotelaTrigger"><i class="fa fa-save"></i> Nueva tela</button>
 						</div>
         	</div>
 				</td>
@@ -33,7 +33,7 @@
 								<option  value="<?= $proveedor->id_proveedor?>"><?=$proveedor->name?></option>
 								<?php endforeach; ?>
 							</select>
-							<button type="button" class="btn btn-success  col-md-2 col-g-2 col-sm-2" data-backdrop="false"  data-toggle="modal" data-target="#proveedorTrigger"><i class="fa fa-save"></i>Proveedor</button>
+							<button type="button" class="btn btn-success  col-md-2 col-g-2 col-sm-2" data-backdrop="false"  data-toggle="modal" data-target="#proveedorTrigger"><i class="fa fa-save"></i> Nuevo Proveedor</button>
 						</div>
         	</div>
 				</td>
@@ -135,8 +135,8 @@
 </div>
 
 
-<!-- Modal Proveedor Clase de prenda-->
-<div class="modal" id="tipoprendaTrigger" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- Modal tela-->
+<div class="modal" id="tipotelaTrigger" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -147,12 +147,30 @@
         </button>
       </div>
       <div class="modal-body">
-			<?php echo form_open_multipart(base_url("index.php/Ajax/createTipoPrenda"), 'id="formTipoPrenda"'); ?>
+			<?php echo form_open_multipart(base_url("index.php/Ajax/createTipoTela"), 'id="formTipoTela"'); ?>
 		<table class="w-100">
 			<tr>
-				<td class="d-md-table-cell d-none" style= "width: 200px;"><label for="name">Categoría:</label></td>
-				<td><input type="text" class="form-control" type="text" name="name" placeholder="Categoría" required></td>
+				<td class="d-md-table-cell d-none" style= "width: 200px;"><label for="name">Nombre:</label></td>
+				<td><input type="text" class="form-control" type="text" name="Nombre" placeholder="Nombre" required></td>
 			</tr>	
+			<tr>
+				<td class="d-md-table-cell d-none" style= "width: 200px;"><label for="name">Descripción:</label></td>
+				<td><input type="text" class="form-control" type="text" name="Descripcion" placeholder="Descripcion" required></td>
+			</tr>
+			<tr>
+			<td class="d-md-table-cell d-none "><label for="Composicion">Composicion:</label></td>
+				<td>
+					<div>
+						<div class="no-margin row">
+							<select id="selectList" type="text" class="form-control col-md-10 col-g-10 col-sm-10" type="text" name="Composicion" required>
+								<?php foreach($Componentes as $Comp):?>
+								<option  value="<?= $Comp->id_composicion?>"><?=$Comp->Composicion?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+        	</div>
+				</td>
+			</tr>		
 		</table>
       </div>
       <div class="modal-footer">

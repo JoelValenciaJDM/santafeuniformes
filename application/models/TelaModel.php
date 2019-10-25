@@ -19,10 +19,17 @@ class TelaModel extends CI_Model{
       'Fecha_modificacion'=>$update_date,
       'Color'=> $Color);
       $this->db->insert('Rollos_tela',$data);
-      
    }  
+
+   Public function createTiposTelas($Nombre, $Descripcion, $Composicion, $Ancho, $Fecha_ingreso, $update_date, $Color){
+    $data = array(   
+    'Nombre'=> $Nombre,
+    'Descripcion'=> $Descripcion,
+    'Composicion'=> $Composicion);
+    $this->db->insert('Tipo_telas',$data);
+ } 
    public function createAjax($data){
-    $this->db->insert('Tipos_prendas',$data);
+    $this->db->insert('Tipo_telas',$data);
 }
 
    public function loadRollos(){
@@ -34,7 +41,7 @@ class TelaModel extends CI_Model{
                                                     ')->result_array());
    }
    public function loadRollosEspesificos($id_tela, $color){
-    return $customers=json_encode($this->db->query("SELECT rt.id_rollo as total_rollos, rt.id_tela, tt.Nombre as tela_name, rt.Metros as total_metros, rt.Color
+    return $customers=json_encode($this->db->query("SELECT rt.id_rollo as id_rollo, rt.id_tela, tt.Nombre as tela_name, rt.Metros as total_metros, rt.Color
                                                         FROM Rollos_tela as rt 
                                                             JOIN Tipo_telas as tt ON rt.id_tela = tt.id_tela 
                                                                 WHERE rt.status = 0 and rt.id_tela = $id_tela and Color = '$color'
@@ -50,12 +57,18 @@ class TelaModel extends CI_Model{
     return $customers=json_encode($this->db->query('SELECT * FROM Proveedores WHERE status = 0')->result_array());
    }
 
-   public function getWear($id_prenda){
-    return $this->db->query("SELECT Prendas.id_prenda, Prendas.name as prenda_name, Prendas.gener, Prendas.id_proveedor, Proveedores.name as proveedor_name, rs, rfc, present, address, suburb, state, city, cp, Phone1, Phone2, Tipos_prendas.name as tipoprenda_name, Prendas.id_tipos_prenda
-                                FROM `Prendas` 
-                                    JOIN Proveedores on Proveedores.id_proveedor= Prendas.id_proveedor 
-                                        JOIN Tipos_prendas ON Prendas.id_tipos_prenda = Tipos_prendas.id_tipo_prenda
-                                            WHERE Prendas.id_prenda = $id_prenda")->row();
+   public function loadComp(){
+    return $customers=json_encode($this->db->query('SELECT * FROM Composiciones')->result_array());
+   }
+
+   public function getTela($id_tela){
+    return $this->db->query("SELECT rt.id_rollo as id_rollo, rt.id_tela, tt.Nombre as tela_name, rt.Fecha_ingreso, rt.Fecha_modificacion, rt.Metros as total_metros, rt.Color, p.id_proveedor, p.name as proveedor_name, Ancho, rs, rfc, present, address, suburb, state, city, cp, Phone1, Phone2, c.Composicion, tt.Descripcion
+                                    FROM Rollos_tela as rt 
+                                        JOIN Tipo_telas as tt ON rt.id_tela = tt.id_tela 
+                                            JOIN  Proveedores as p ON rt.id_proveedor = p.id_proveedor
+                                                JOIN Composiciones as c ON tt.composicion = c.id_composicion
+                                                WHERE rt.id_rollo = $id_tela"
+                                                )->row();
     }
 
     public function search($search,$start = FALSE, $registers = FALSE){
@@ -94,7 +107,10 @@ class TelaModel extends CI_Model{
     public function getNewTipoPrenda(){
         return $customers=json_encode($this->db->query('SELECT * FROM `Tipos_prendas` WHERE id_tipo_prenda = (SELECT max(id_tipo_prenda) FROM Tipos_prendas)')->result_array());
        }
-    
+
+    public function getNewTipoTela(){
+     return $customers=json_encode($this->db->query('SELECT * FROM `Tipo_telas` WHERE id_tela = (SELECT max(id_tela) FROM Tipo_telas)')->result_array());
+    }
 
   }
   ?>

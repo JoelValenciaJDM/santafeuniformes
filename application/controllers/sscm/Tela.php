@@ -22,6 +22,7 @@ echo $this->pagination->create_links();
    public function newTela(){
     $data['telas'] = json_decode($this->TelaModel->loadTelas());
     $data['proveedores'] = json_decode($this->TelaModel->loadProveedores());
+    $data['Componentes'] = json_decode($this->TelaModel->loadComp());
     $data = array_merge($data, $this->CpanelModel->loadData());
     $this->load->view('sscm/Telas/newtela', $data);  
    }
@@ -44,6 +45,7 @@ echo $this->pagination->create_links();
    }  
 
    public function listTela($id_tela, $color){
+     $color = urldecode($color);
     $data['Telas'] = json_decode($this->TelaModel->loadRollosEspesificos($id_tela, $color));
     // echo ($this->TelaModel->loadTelas());
     $data = array_merge($data,$this->CpanelModel->loadData());
@@ -51,11 +53,11 @@ echo $this->pagination->create_links();
    }  
 
 
-   public function viewData($id_prenda){
-    $data['Wear'] = $this->TelaModel->getWear($id_prenda);
+   public function viewData($id_tela){
+    $data['Tela'] = $this->TelaModel->getTela($id_tela);
     $data = array_merge($data, $this->CpanelModel->loadData());
     // var_dump ($this->TelaModel->getWear($id_prenda));
-    $this->load->view('sscm/Telas/prenda', $data);
+    $this->load->view('sscm/Telas/tela', $data);
  }
 
   public function editData($id_prenda){

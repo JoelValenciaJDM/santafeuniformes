@@ -23,12 +23,12 @@
 				<tbody>
         	<?php foreach($Telas as $tela): ?>
 			  		<tr>
-			  			<td class="d-md-table-cell d-none"><?= htmlentities($tela->total_rollos) ?></td>
+			  			<td class="d-md-table-cell d-none"><?= htmlentities($tela->id_rollo) ?></td>
 			  			<td class="d-md-table-cell d-none"><?= htmlentities($tela->tela_name) ?></td>
 			  			<td class="d-md-table-cell d-none"><?= htmlentities($tela->Color) ?></td>
 			  			<td class="d-md-table-cell d-none"><?= htmlentities($tela->total_metros) ?></td>
 
-			  			<td><a href="<?= base_url('index.php/sscm/prenda/viewData/'.$tela->id_tela) ?>" class="btn btn-success"><i class="fa fa-eye"></i> Ver detalles</a></td>
+			  			<td><a href="<?= base_url('index.php/sscm/tela/viewData/'.$tela->id_rollo) ?>" class="btn btn-success"><i class="fa fa-eye"></i> Ver detalles</a></td>
 			  		</tr>
 		  		<?php endforeach; ?>
       </table>

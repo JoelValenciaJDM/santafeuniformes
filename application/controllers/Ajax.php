@@ -11,6 +11,7 @@ class Ajax extends CI_Controller {
         $this->load->model('MaquilaModel');
         $this->load->model('ProveedorModel');
         $this->load->model('PrendaModel');
+        $this->load->model('TelaModel');
     }
     public function index(){
         
@@ -40,6 +41,12 @@ class Ajax extends CI_Controller {
        $this->PrendaModel->createAjax($data);
     }
 
+    public function createTipoTela() { 
+        $data = array();
+        parse_str($_POST['data'], $data);  
+       $this->TelaModel->createAjax($data);
+    }
+
     public function updateProveedor() { 
         $data = array();
         parse_str($_POST['data'], $data);  
@@ -52,11 +59,16 @@ class Ajax extends CI_Controller {
         echo ($data);
     }
 
-    public function getNewTipoPrenda(){
-        
+    public function getNewTipoPrenda(){        
         $data = $this->PrendaModel->getNewTipoPrenda();
         echo ($data);
     }
+
+    public function getNewTipoTela(){        
+        $data = $this->TelaModel->getNewTipoTela();
+        echo ($data);
+    }
+
 
 
 

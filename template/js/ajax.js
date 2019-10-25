@@ -138,4 +138,49 @@ $("#formTipoPrenda").submit(function(event){
 	});
 	  // $("#server-results").html(response);
 	});
+
+});
+
+
+$("#formTipoTela").submit(function(event){ //Save the data from modal Tipo Tela
+    
+    
+  event.preventDefault(); //prevent default action 
+  var post_url = $(this).attr("action"); //get form action url
+  var request_method = $(this).attr("method"); //get form GET/POST method
+    var form_data = $(this).serialize(); //Encode form elements for submission
+    console.log(form_data);
+    
+  
+  $.ajax({ //Post data to php controller 
+    url : post_url,
+    type: request_method,
+        data : {data: form_data},
+        success: () => {
+            alertify.success("Se hicieron los cambios");
+            
+        }
+        
+	}).done(function(response){ //
+		
+		$.ajax({ //Get json from db
+			type:'POST',
+			url:'http://localhost/santafeuniformes/index.php/ajax/getNewTipoTela', //get the last id of the table
+			dataType: "json",
+			data:{},
+			success:function(data){
+					 console.log(data[0]);
+					 var o = new Option(data[0].Nombre, data[0].id_tela); //add the data in a variable for the options
+						/// jquerify the DOM object 'o' so we can use the html method
+						$(o).html(data[0].Nombre); // search the option
+						$("#selectListtipotela").append(o); //add a new option
+						$("#selectListtipotela").val(data[0].id_tela); //add the valor
+						$("#tipotelaTrigger").modal('hide');//close the modal
+						$("#formTipoTela")[0].reset();
+			}
+	});
+	  // $("#server-results").html(response);
+	});
+
+	
 });
