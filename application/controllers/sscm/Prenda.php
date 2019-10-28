@@ -26,7 +26,7 @@ echo $this->pagination->create_links();
    }
 
    public function create(){
-    $this->PrendaModel->create($_POST['name'],$_POST['gener'],$_POST['id_proveedor'], $_POST['id_tipos_prendas']);
+    $this->PrendaModel->create($_POST['name'],$_POST['gener'],$_POST['id_proveedor'], $_POST['id_tipos_prenda']);
 
     redirect('sscm/cpanel','refresh');
    }

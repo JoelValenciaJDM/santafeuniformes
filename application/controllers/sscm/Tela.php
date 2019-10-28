@@ -60,13 +60,13 @@ echo $this->pagination->create_links();
     $this->load->view('sscm/Telas/tela', $data);
  }
 
-  public function editData($id_prenda){
+  public function editData($id_rollo){
     
    $data['proveedores'] = json_decode($this->TelaModel->loadProveedores());
-   $data['type_Telas'] =json_decode($this->TelaModel->loadTipoPrenda());
-   $data['Wear'] = $this->TelaModel->getWear($id_prenda);
+   $data['telas'] = json_decode($this->TelaModel->loadTelas());
+   $data['Tela'] = $this->TelaModel->getTela($id_rollo);
    $data = array_merge($data, $this->CpanelModel->loadData());
-   $this->load->view('sscm/Telas/prendaedit', $data);
+   $this->load->view('sscm/Telas/telaedit', $data);
   }
 
   

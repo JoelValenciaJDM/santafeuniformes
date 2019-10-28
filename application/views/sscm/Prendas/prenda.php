@@ -7,7 +7,7 @@
 	<p class="alert alert-danger"><?= htmlentities($error) ?></p>
 	<?php endif; ?>
 	<div class="card p-4">
-		<?php echo form_open_multipart(base_url("index.php/sscm/Customer/create"), 'id="form"'); ?>
+		<?php echo form_open_multipart(base_url("index.php/sscm/Prenda/create"), 'id="form"'); ?>
 		<input type="hidden"  name="id_prenda"  value="<?= htmlentities($Wear->id_prenda) ?>"  required>
 		<table class="w-100">
 			<tr>
@@ -41,7 +41,7 @@
 
 		</table>
 				<br>
-		<a href="<?=base_url() . 'index.php/sscm/cpanel'?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Regresar</a>
+		<a href="<?=base_url() . 'index.php/sscm/prenda/list'?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Regresar</a>
 		<!-- <a href="<?=base_url() . 'index.php/sscm/prenda/deleteData/'.$Wear->id_prenda?>" class="btn btn-danger" id="delite"><i class="fa fa-edit"></i> Eliminar</a> -->
 		<a class="btn btn-danger" id="delate"><i class="fa fa-edit"></i> Eliminar</a>
 		<a href="<?=base_url() . 'index.php/sscm/Prenda/editData/'.$Wear->id_prenda?>" class="btn btn-success"><i class="fa fa-edit"></i> Editar</a>

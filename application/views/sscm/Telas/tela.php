@@ -2,16 +2,16 @@
 
 
 <div class="container">
-	<h2>Rollo:  <?= htmlentities($Tela->id_tela) ?></h2>
+	<h2>Rollo:  <?= htmlentities($Tela->id_rollo) ?></h2>
 	<?php if(!empty($error)): ?>
 	<p class="alert alert-danger"><?= htmlentities($error) ?></p>
 	<?php endif; ?>
 	<div class="card p-4">
 		<?php echo form_open_multipart(base_url("index.php/sscm/Customer/create"), 'id="form"'); ?>
-		<input type="hidden"  name="id_prenda"  value="<?= htmlentities($Tela->id_tela) ?>" readonly required>
+		<input type="hidden"  name="id_rollo"  value="<?= htmlentities($Tela->id_rollo) ?>" readonly required>
 		<table class="w-100">
 		<tr>
-			<td class="d-md-table-cell d-none "><label for="id_tela">Tela:</label></td>
+			<td class="d-md-table-cell d-none "><label for="tela_name">Tela:</label></td>
 				<td>
 					<div>
 						<div class="no-margin row">
@@ -57,9 +57,9 @@
 
 				<br>
 		<a href="<?=base_url() . 'index.php/sscm/tela/listtela/'.$Tela->id_tela.'/'.$Tela->Color?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Regresar</a>
-		<!-- <a href="<?=base_url() . 'index.php/sscm/prenda/deleteData/'.$Tela->id_tela?>" class="btn btn-danger" id="delite"><i class="fa fa-edit"></i> Eliminar</a> -->
+		<!-- <a href="<?=base_url() . 'index.php/sscm/tela/deleteData/'.$Tela->id_rollo?>" class="btn btn-danger" id="delite"><i class="fa fa-edit"></i> Eliminar</a> -->
 		<a class="btn btn-danger" id="delate"><i class="fa fa-edit"></i> Eliminar</a>
-		<a href="<?=base_url() . 'index.php/sscm/Prenda/editData/'.$Tela->id_tela?>" class="btn btn-success"><i class="fa fa-edit"></i> Editar</a>
+		<a href="<?=base_url() . 'index.php/sscm/tela/editData/'.$Tela->id_rollo?>" class="btn btn-success"><i class="fa fa-edit"></i> Editar</a>
 
 	</form>
 </div>

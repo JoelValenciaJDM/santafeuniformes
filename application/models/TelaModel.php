@@ -27,10 +27,12 @@ class TelaModel extends CI_Model{
     'Descripcion'=> $Descripcion,
     'Composicion'=> $Composicion);
     $this->db->insert('Tipo_telas',$data);
- } 
+    } 
    public function createAjax($data){
     $this->db->insert('Tipo_telas',$data);
-}
+    }
+
+
 
    public function loadRollos(){
     return $customers=json_encode($this->db->query('SELECT COUNT(rt.id_rollo) as total_rollos, rt.id_tela, tt.Nombre as tela_name, SUM(rt.Metros) as total_metros, rt.Color
@@ -85,23 +87,23 @@ class TelaModel extends CI_Model{
         return $sql->reset();
     }
 
-    public function update($data){
+    public function updateRollo($data){
         $this->db->set($data);
-        $this->db->where('id_prenda', $data['id_prenda']);
-        return $this->db->update('Wears');
+        $this->db->where('id_rollo', $data['id_rollo']);
+        return $this->db->update('Rollos_tela');
     }
 
     public function deleteData($data){
         $send = array();
-        $id_prenda = $data['id_prenda'];
+        $id_rollo = $data['id_rollo'];
          var_dump ($data);
 
         $send = array(
             'status'=> 1
         );
         $this->db->set($send);
-        $this->db->where('id_prenda', $id_prenda);
-        $this->db->update('Prendas');
+        $this->db->where('id_rollo', $id_rollo);
+        $this->db->update('Rollos_tela');
     }
     
     public function getNewTipoPrenda(){

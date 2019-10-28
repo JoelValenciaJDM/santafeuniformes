@@ -41,11 +41,11 @@
 			</tr>
 
 			<tr>
-				<td class="d-md-table-cell d-none"><label for="id_tipos_prendas">Tipo de prenda:</label></td>
+				<td class="d-md-table-cell d-none"><label for="id_tipos_prenda">Tipo de prenda:</label></td>
 				<div>
 				<td>
         	<div class=" no-margin row">
-						<select type="text" id="selectListtipoprenda" class="form-control col-md-10 col-g-10 col-sm-10" type="text" name="id_tipos_prendas" required>
+						<select type="text" id="selectListtipoprenda" class="form-control col-md-10 col-g-10 col-sm-10" type="text" name="id_tipos_prenda" required>
 							<?php foreach($type_prendas as $tp):?>
 							<option value="<?= $tp->id_tipo_prenda?>"  <?php if($Wear->id_tipos_prenda == $tp->id_tipo_prenda){ echo ('selected');}?>><?=$tp->name?></option>
 							<?php endforeach;?> </select>
@@ -57,7 +57,7 @@
 
 		</table>
 		<br>
-		<a href="<?=base_url() . 'index.php/sscm/cpanel/'?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Regresar</a>
+		<a href="<?=base_url() . 'index.php/sscm/prenda/viewData/'.$Wear->id_prenda?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Regresar</a>
 		<input type="submit" name="submit" value="Enviar" />
 		<div id="server-results"><!-- For server results --></div>
 		<!-- <button class="btn btn-success" type="submit"><i class="fa fa-save"></i> Editar</button> -->

@@ -65,7 +65,7 @@ class PrendaModel extends CI_Model{
     public function update($data){
         $this->db->set($data);
         $this->db->where('id_prenda', $data['id_prenda']);
-        return $this->db->update('Wears');
+        return $this->db->update('Prendas');
     }
 
     public function deleteData($data){

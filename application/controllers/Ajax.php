@@ -14,6 +14,8 @@ class Ajax extends CI_Controller {
         $this->load->model('TelaModel');
     }
     public function index(){
+
+    //Custumer
         
     }
     public function updateCustomer() {
@@ -23,11 +25,15 @@ class Ajax extends CI_Controller {
          $this->CustomerModel->update($data);
      }
 
+    // Maquila
+
     public function updateMaquila() { 
         $data = array();
         parse_str($_POST['data'], $data);  
        $this->MaquilaModel->update($data);
     }
+
+    // Proveedor
 
     public function createProveedor() { 
         $data = array();
@@ -35,17 +41,6 @@ class Ajax extends CI_Controller {
        $this->ProveedorModel->createAjax($data);
     }
 
-    public function createTipoPrenda() { 
-        $data = array();
-        parse_str($_POST['data'], $data);  
-       $this->PrendaModel->createAjax($data);
-    }
-
-    public function createTipoTela() { 
-        $data = array();
-        parse_str($_POST['data'], $data);  
-       $this->TelaModel->createAjax($data);
-    }
 
     public function updateProveedor() { 
         $data = array();
@@ -59,15 +54,49 @@ class Ajax extends CI_Controller {
         echo ($data);
     }
 
+
+
+    //Tipo Prenda
+
     public function getNewTipoPrenda(){        
         $data = $this->PrendaModel->getNewTipoPrenda();
         echo ($data);
     }
 
+    public function updateWear() { 
+        $data = array();
+        parse_str($_POST['data'], $data);  
+       $this->PrendaModel->update($data);
+    }
+
+    public function createTipoPrenda() { 
+        $data = array();
+        parse_str($_POST['data'], $data);  
+       $this->PrendaModel->createAjax($data);
+    }
+
+
+    // Tipo tela
+
     public function getNewTipoTela(){        
         $data = $this->TelaModel->getNewTipoTela();
         echo ($data);
     }
+
+    public function createTipoTela() { 
+        $data = array();
+        parse_str($_POST['data'], $data);  
+       $this->TelaModel->createAjax($data);
+    }
+
+    // Rollo de tela 
+    public function updateRollo() { 
+        $data = array();
+        parse_str($_POST['data'], $data);  
+       $this->TelaModel->updateRollo($data);
+    }
+
+
 
 
 
