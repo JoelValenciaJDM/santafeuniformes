@@ -184,3 +184,250 @@ $("#formTipoTela").submit(function(event){ //Save the data from modal Tipo Tela
 
 	
 });
+
+$("#advanced").submit(function(event){ //Save the data from modal Tipo Tela
+    
+
+		
+		$.ajax({ //Get json from db
+			type:'POST',
+			url:'http://localhost/santafeuniformes/index.php/ajax/getNewTipoTela', //get the last id of the table
+			dataType: "json",
+			data:{},
+			success:function(data){
+									
+			}
+	});	
+});
+
+
+
+$("#formAdvancedOptions").submit(function(event){
+    
+  event.preventDefault(); //prevent default action 
+  var post_url = $(this).attr("action"); //get form action url
+  var request_method = $(this).attr("method"); //get form GET/POST method
+    var form_data = $(this).serialize(); //Encode form elements for submission
+    console.log(form_data);
+    var idPrenda = $("#id_prenda").val()
+    var tallajeOld = $("#tallajeOld").val()
+    var tallaje = $("#tallaje").val()
+    var idUso = $("#id_uso").val()
+		var forro = $("#forro").val()
+		
+		if(tallajeOld== tallaje){
+			$.ajax({
+				url : post_url,
+				type: request_method,
+						data : {data: form_data},
+						success: () => {
+								alertify.success("Se hicieron los cambios");
+						}
+						
+			}).done(function(response){ //
+				
+				// $("#server-results").html(response);
+			});
+			console.log("Entró a tipo 1");
+			$("#advancedOptionsTrigger").modal('hide');//close the modal
+			$("#principalTrigger").modal('show');
+			
+			if(forro){
+					console.log("holi prro");
+			}
+	}else if (tallajeOld != tallaje){
+		$.ajax({
+			url : "http://localhost/santafeuniformes/index.php/Ajax/advancedOptionsElse",
+			type: request_method,
+					data : {data: form_data},
+					success: () => {
+							alertify.success("Se hicieron los cambios");
+							location.reload();
+
+					}
+					
+		}).done(function(response){ //
+			
+			// $("#server-results").html(response);
+		});
+		location.reload();
+
+	}
+});
+
+$("#formConsumoPrincipal").submit(function(event){
+    
+  event.preventDefault(); //prevent default action 
+  var post_url = $(this).attr("action"); //get form action url
+  var request_method = $(this).attr("method"); //get form GET/POST method
+    var form_data = $(this).serialize(); //Encode form elements for submission
+		console.log(form_data);
+		var idUso = $("#id_uso").val();
+    
+  
+  $.ajax({
+    url : post_url,
+    type: request_method,
+        data : {data: form_data},
+        success: () => {
+						$("#principalTrigger").modal('hide');
+						console.log(forro);
+						alertify.success("Se hicieron los cambios");
+						if(idUso==2 || idUso==3 || idUso==4){
+							$("#secundariaTrigger").modal('show');
+						}else{
+						if($("#forro").prop('checked')){
+							$("#ForroTrigger").modal('show');
+							
+						}
+					}
+        }
+        
+  }).done(function(response){ //
+    
+    // $("#server-results").html(response);
+  });
+});
+
+$("#formConsumoSecundaria").submit(function(event){
+    
+  event.preventDefault(); //prevent default action 
+  var post_url = $(this).attr("action"); //get form action url
+  var request_method = $(this).attr("method"); //get form GET/POST method
+    var form_data = $(this).serialize(); //Encode form elements for submission
+		console.log(form_data);
+		var idUso = $("#id_uso").val();
+    
+  
+  $.ajax({
+    url : post_url,
+    type: request_method,
+        data : {data: form_data},
+        success: () => {
+						$("#principalTrigger").modal('hide');
+						console.log(forro);
+						alertify.success("Se hicieron los cambios");
+						if(idUso==3 || idUso==4){
+						   $("#secundariaTrigger").modal('hide');
+							 $("#terciariaTrigger").modal('show');
+						}else{
+						if($("#forro").prop('checked')){
+							$("#secundariaTrigger").modal('hide');
+							$("#ForroTrigger").modal('show');
+							
+						}else{
+							$("#secundariaTrigger").modal('hide');
+							location.reload();
+						}
+					}
+        }
+        
+  }).done(function(response){ //
+    
+    // $("#server-results").html(response);
+  });
+});
+
+
+$("#formConsumoTerciaria").submit(function(event){
+    
+  event.preventDefault(); //prevent default action 
+  var post_url = $(this).attr("action"); //get form action url
+  var request_method = $(this).attr("method"); //get form GET/POST method
+    var form_data = $(this).serialize(); //Encode form elements for submission
+		console.log(form_data);
+		var idUso = $("#id_uso").val();
+    
+  
+  $.ajax({
+    url : post_url,
+    type: request_method,
+        data : {data: form_data},
+        success: () => {
+						$("#terceraTrigger").modal('hide');
+						console.log(forro);
+						alertify.success("Se hicieron los cambios");
+						if(idUso==4){
+							$("#terciariaTrigger").modal('hide');
+							$("#cuartaTrigger").modal('show');
+						}else{
+						if($("#forro").prop('checked')){
+							$("#terciariaTrigger").modal('hide');
+							$("#ForroTrigger").modal('show');
+							
+						}else{
+							$("#terciariaTrigger").modal('hide');
+							location.reload();
+						}
+					}
+        }
+        
+  }).done(function(response){ //
+    
+    // $("#server-results").html(response);
+  });
+});
+
+$("#formConsumoCuarta").submit(function(event){
+    
+  event.preventDefault(); //prevent default action 
+  var post_url = $(this).attr("action"); //get form action url
+  var request_method = $(this).attr("method"); //get form GET/POST method
+    var form_data = $(this).serialize(); //Encode form elements for submission
+		console.log(form_data);
+		var idUso = $("#id_uso").val();
+    
+  
+  $.ajax({
+    url : post_url,
+    type: request_method,
+        data : {data: form_data},
+        success: () => {
+						$("#terciariaTrigger").modal('hide');
+						console.log(forro);
+						alertify.success("Se hicieron los cambios");
+						if($("#forro").prop('checked')){
+							$("#cuartaTrigger").modal('hide');
+							$("#ForroTrigger").modal('show');
+							
+						}else{
+							$("#cuartaTrigger").modal('hide');
+							location.reload();
+						}
+        }
+        
+  }).done(function(response){ //
+    
+    // $("#server-results").html(response);
+  });
+});
+
+
+$("#formConsumoForro").submit(function(event){
+    
+  event.preventDefault(); //prevent default action 
+  var post_url = $(this).attr("action"); //get form action url
+  var request_method = $(this).attr("method"); //get form GET/POST method
+    var form_data = $(this).serialize(); //Encode form elements for submission
+		console.log(form_data);
+    
+  
+  $.ajax({
+    url : post_url,
+    type: request_method,
+        data : {data: form_data},
+        success: () => {
+
+					$("#ForroTrigger").modal('hide');
+						console.log(forro);
+						alertify.success("Se hicieron los cambios");
+						location.reload();
+
+            
+        }
+        
+  }).done(function(response){ //
+    
+    // $("#server-results").html(response);
+  });
+});

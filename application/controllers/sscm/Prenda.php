@@ -26,10 +26,20 @@ echo $this->pagination->create_links();
    }
 
    public function create(){
-    $this->PrendaModel->create($_POST['name'],$_POST['gener'],$_POST['id_proveedor'], $_POST['id_tipos_prenda']);
-
-    redirect('sscm/cpanel','refresh');
+    $this->PrendaModel->create($_POST['name'],$_POST['gener'],$_POST['id_proveedor'], $_POST['id_tipos_prendas'],$_POST['tallaje']);
+    $id_prenda = json_decode($this->PrendaModel->getidPrenda());
+    $idPrenda;
+    // var_dump ($id_prenda);
+    foreach ($id_prenda as $idp):
+      $idPrenda= $idp->id_lastPrenda;
+      $id_tipo_uso = 1;
+    endforeach;
+    echo $_POST['tallaje'];
+    $this->PrendaModel->createTallas($_POST['tallaje'], $idPrenda, $id_tipo_uso);
+    
+    redirect('sscm/prenda/list','refresh');
    }
+
 
    public function list(){
   
@@ -47,12 +57,22 @@ echo $this->pagination->create_links();
  }
 
   public function editData($id_prenda){
+   $data['tallas'] = json_decode($this->PrendaModel->getTallas($id_prenda));
    $data['proveedores'] = json_decode($this->PrendaModel->loadProveedores());
+   $data['forros'] = json_decode($this->PrendaModel->getPrendaTipoUsoForro($id_prenda));
+   $data['secundarias'] = json_decode($this->PrendaModel->getPrendaTipoUsoSecundaria($id_prenda));
+   $data['terciarias'] = json_decode($this->PrendaModel->getPrendaTipoUsoTerciaria($id_prenda));
+   $data['cuartas'] = json_decode($this->PrendaModel->getPrendaTipoUsoCuarta($id_prenda));
+  //  var_dump($data['proveedores']);
    $data['type_prendas'] =json_decode($this->PrendaModel->loadTipoPrenda());
    $data['Wear'] = $this->PrendaModel->getWear($id_prenda);
+   $data['maxTipoUso']= $this->PrendaModel->maxTipoUso($id_prenda);
    $data = array_merge($data, $this->CpanelModel->loadData());
    $this->load->view('sscm/Prendas/prendaedit', $data);
   }
+
+
+
 
   
   // public function updateWear($id_cliente){

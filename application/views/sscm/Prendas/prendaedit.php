@@ -54,13 +54,23 @@
           </div>
         </td>
 			</tr>
-
+			<!-- <tr>
+				<td class="d-md-table-cell d-none"><label for="tallaje">Tallaje:</label></td>
+				<td><select type="text" class="form-control" type="text" name="tallaje" required>
+				
+					<option value="0" <?php if($Wear->tallaje == 0){ echo ('selected');}?>>Alfanumerico (XCH-5XG)</option>
+					<option value="1" <?php if($Wear->tallaje == 1){ echo ('selected');} ?>>Numerico (26-58)</option>
+					<option value="2" <?php if($Wear->tallaje == 2){ echo ('selected');} ?>>Niños (1-18)</option>
+				</select></td>
+			</tr>		 -->
 		</table>
 		<br>
 		<a href="<?=base_url() . 'index.php/sscm/prenda/viewData/'.$Wear->id_prenda?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Regresar</a>
 		<input type="submit" name="submit" value="Enviar" />
 		<div id="server-results"><!-- For server results --></div>
 		<!-- <button class="btn btn-success" type="submit"><i class="fa fa-save"></i> Editar</button> -->
+		<button type="button" class="btn btn-success  col-md-2 col-g-2 col-sm-2" data-backdrop="false"  data-toggle="modal" data-target="#advancedOptionsTrigger"><i class="fa fa-save"></i>Opciones Avanzadas</button>
+
 		<div id="server-results">
 	</form>
 </div>
@@ -166,7 +176,7 @@
 
 
 
-
+<?php $this->load->view("sscm/Prendas/advancedoptions.php") ?>
 <script src="<?php echo base_url('index.php/../template/js/ajax.js')?>"></script>
 
 

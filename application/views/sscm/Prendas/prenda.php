@@ -38,7 +38,15 @@
 				<td class="d-md-table-cell d-none" style= "width: 200px;"><label for="type">Categoria:</label></td>
 				<td><input type="text" class="form-control" type="text" name="type" placeholder="Categoria" value="<?= htmlentities($Wear->tipoprenda_name) ?>"  required></td>
 			</tr>
-
+			<tr>
+				<td class="d-md-table-cell d-none" style= "width: 200px;"><label for="tallaje">Tallaje:</label></td>
+				<td><input type="text" class="form-control" type="text" name="tallaje" placeholder="Tallaje" value="<?php switch ($Wear->tallaje): ?><?php case 0: echo("Alfanumerico (XCH-5XG)") ?><?php break;?>
+							<?php case 1: echo("Numerico (26-58)")?>
+							<?php break;?>
+							<?php case 2: echo("Niños (1-18)") ?>
+							<?php break;?>
+							<?php endswitch ?>" required></td>
+			</tr>	
 		</table>
 				<br>
 		<a href="<?=base_url() . 'index.php/sscm/prenda/list'?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Regresar</a>

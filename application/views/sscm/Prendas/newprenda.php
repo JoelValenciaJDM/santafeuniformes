@@ -17,7 +17,7 @@
 				<td><select type="text" class="form-control" type="text" name="gener" required>
 					<option value="0">Caballero</option>
 					<option value="1">Dama</option>
-					<option value="3">Unisex</option>
+					<option value="2">Unisex</option>
 				</select></td>
 			</tr>			
 			<tr>
@@ -50,6 +50,14 @@
           </div>
         </td>
 			</tr>
+			<tr>
+				<td class="d-md-table-cell d-none"><label for="tallaje">Tallaje:</label></td>
+				<td><select type="text" class="form-control" type="text" name="tallaje" required>
+					<option value="0">Alfanumerico (XCH-5XG)</option>
+					<option value="1">Numerico (26-58)</option>
+					<option value="2">Niños (1-18)</option>
+				</select></td>
+			</tr>	
 
 		</table>
 		<br>
