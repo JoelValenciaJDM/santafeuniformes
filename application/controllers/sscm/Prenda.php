@@ -28,7 +28,7 @@ echo $this->pagination->create_links();
    public function create(){
     $this->PrendaModel->create($_POST['name'],$_POST['gener'],$_POST['id_proveedor'], $_POST['id_tipos_prendas'],$_POST['tallaje']);
     $id_prenda = json_decode($this->PrendaModel->getidPrenda());
-    $idPrenda;
+    // $idPrenda;
     // var_dump ($id_prenda);
     foreach ($id_prenda as $idp):
       $idPrenda= $idp->id_lastPrenda;

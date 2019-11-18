@@ -228,7 +228,6 @@ $("#formAdvancedOptions").submit(function(event){
 				
 				// $("#server-results").html(response);
 			});
-			console.log("Entró a tipo 1");
 			$("#advancedOptionsTrigger").modal('hide');//close the modal
 			$("#principalTrigger").modal('show');
 			
