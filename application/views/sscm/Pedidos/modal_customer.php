@@ -21,13 +21,13 @@
 					</thead>
 					<tbody>
 						<?php foreach ($customers as $customer) : ?>
-							<tr>
+							<tr id="id<?= htmlentities($customer->id_cliente) ?>">
 								<td class="d-md-table-cell d-none"><?= htmlentities($customer->id_cliente) ?></td>
-								<td><?= htmlentities($customer->name . " " . $customer->lastname . " " . $customer->second_lastname) ?></td>
+								<td class="name"><?= htmlentities($customer->name . " " . $customer->lastname . " " . $customer->second_lastname) ?></td>
 								<td class="d-md-table-cell d-none"><?= htmlentities($customer->enterprice) ?></td>
 								<td class="d-md-table-cell d-none"><?= htmlentities($customer->phone) ?></td>
 								<td>
-									<a href="<?= base_url('index.php/sscm/Customer/viewData/' . $customer->id_cliente) ?>" class="btn btn-success"><i class="fa fa-eye"></i> Seleccionar</a>
+									<button onclick="selectcustomerbutton(<?= htmlentities($customer->id_cliente) ?>)" class="btn btn-success"><i class="fa fa-eye"></i> Seleccionar</button>
 								</td>
 							</tr>
 						<?php endforeach; ?>
@@ -92,8 +92,8 @@
 </div>
 
 <script>
-		$(document).ready(function() {
-			$("#newTalla").prop('disabled', true);
+	$(document).ready(function() {
+		$("#newTalla").prop('disabled', true);
 	});
 </script>
 

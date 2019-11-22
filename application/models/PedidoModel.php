@@ -58,7 +58,11 @@ class PedidoModel extends CI_Model
     }
     public function loadPrendaAjax($id_prenda)
     {
-        return $prendas = json_encode($this->db->query("SELECT id_prenda, Prendas.name FROM Prendas WHERE id_tipos_prenda = $id_prenda ")->result_array());
+        return $prendas = json_encode($this->db->query("SELECT id_prenda, Prendas.name FROM Prendas WHERE id_tipos_prenda = $id_prenda AND id_proveedor = 1")->result_array());
+    }
+    public function loadPrendaCompraAjax($id_prenda)
+    {
+        return $prendas = json_encode($this->db->query("SELECT id_prenda, Prendas.name FROM Prendas WHERE id_tipos_prenda = $id_prenda AND id_proveedor <> 1")->result_array());
     }
 
     public function loadTonosAjax($id_color, $id_tela)
@@ -110,5 +114,29 @@ class PedidoModel extends CI_Model
         $this->db->set($send);
         $this->db->where('id_cliente', $id_cliente);
         $this->db->update('Clientes');
+    }
+    public function insertPedido($data)
+    {
+        $this->db->insert('Pedido', $data);
+    }
+    public function insertPrendasPedido($data)
+    {
+        $this->db->insert('Prendas_pedido', $data);
+    }
+    
+    public function getlastId()
+    {
+        return $maxid = $this->db->query("SELECT max(id_pedido) as maxid FROM Pedido")->row();
+    }
+
+    public function getlastIdPrendaPedido($id_pedido)
+    {
+        return $maxid = $this->db->query("SELECT max(id_prenda_pedido) as p FROM Prendas_pedido WHERE id_pedido = $id_pedido")->row();
+    }
+
+
+    public function insertPrendasPedidoTallas($data)
+    {
+        $this->db->insert('Prendas_pedido_tallas', $data);
     }
 }

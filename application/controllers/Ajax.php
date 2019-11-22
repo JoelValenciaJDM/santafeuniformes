@@ -650,16 +650,126 @@ class Ajax extends CI_Controller
     public function getPrendasAjax()
     {
         echo $prendas = $this->PedidoModel->loadPrendaAjax($_POST['id']);
-      }
+    }
+
+    public function getPrendasCompraAjax()
+    {
+        echo $prendas = $this->PedidoModel->loadPrendaCompraAjax($_POST['id']);
+    }
+
 
     public function getTonosAjax()
     {
         echo $prendas = $this->PedidoModel->loadTonosAjax($_POST['id_color'], $_POST['id_tela']);
+    }
+    public function getTonosAjaxCompra()
+    {
+        echo $prendas = $this->PedidoModel->loadTonosAjaxCompr($_POST['id_color'], $_POST['id_tela']);
     }
 
     public function getTallasAjax()
     {
         echo $prendas = $this->PedidoModel->loadTallasAjax($_POST['id_prenda']);
     }
-      
+
+    public function sendDataPedido()
+    {
+        var_dump(json_decode($_POST['data']));
+        $pedido_data = (json_decode($_POST['data']));
+
+
+        $pedido = [
+            "Fecha_ingreso" => $pedido_data->date_ingres,
+            "Fecha_tentativa_entrega" => $pedido_data->date_delivery,
+            "status" => 1,
+            "id_cliente" => $pedido_data->id_customer,
+            "id_seller" => $pedido_data->id_vendedor
+        ];
+
+        $this->PedidoModel->insertPedido($pedido);
+        echo ('<br>');
+        echo ('Datos generales');
+        echo ('<br>');
+        echo ($pedido_data->date_ingres);
+        echo ('<br>');
+        echo ($pedido_data->date_delivery);
+        echo ('<br>');
+        echo ($pedido_data->id_customer);
+        echo ('<br>');
+        echo ($pedido_data->id_vendedor);
+
+        $lastid = $this->PedidoModel->getlastId();
+        echo ($lastid->maxid . " max id");
+        $pedidoData = ($pedido_data->data);
+
+        for ($i = 0; $i < count($pedidoData); $i++) {
+
+            echo ('<br>');
+            echo ('Datos de pedido');
+            echo ('<br>');
+
+            $prendas_pedido = [
+                "id_pedido" => $lastid->maxid,
+                "id_tipo_pedido" => $pedidoData[$i]->tipo,
+                "id_prenda" => $pedidoData[$i]->id_prenda,
+                "id_tela" => $pedidoData[$i]->id_tela,
+                "color" => $pedidoData[$i]->color,
+                "colortela" => $pedidoData[$i]->colortela,
+                "bordado" => $pedidoData[$i]->bordado,
+                "impresion" => $pedidoData[$i]->impresion
+            ];
+
+            $this->PedidoModel->insertPrendasPedido($prendas_pedido);
+
+            echo $pedidoData[$i]->tipo;
+            echo ('<br>');
+            echo $pedidoData[$i]->categoria;
+            echo ('<br>');
+            echo $pedidoData[$i]->id_prenda;
+            echo ('<br>');
+            echo $pedidoData[$i]->id_tela;
+            echo ('<br>');
+            echo $pedidoData[$i]->color;
+            echo ('<br>');
+            echo $pedidoData[$i]->colortela;
+            echo ('<br>');
+            echo $pedidoData[$i]->bordado;
+            echo ('<br>');
+            echo $pedidoData[$i]->impresion;
+            echo ('<br>');
+            var_dump($pedidoData[$i]->tallas);
+            $tallas = ($pedidoData[$i]->tallas);
+            echo ('<br>');
+
+            $lastidprendapedido = $this->PedidoModel->getlastIdPrendaPedido($lastid->maxid);
+            var_dump ($lastidprendapedido);
+            $prendapedidotalla=$lastidprendapedido->p;
+
+            
+            echo ('<br>');
+            echo ('array');
+            echo ('<br>');
+            // var_dump($prendapedidotalla);
+
+            echo ('<br>');
+            
+
+            for ($j = 0; $j < count($tallas); $j++) {
+                $Prendas_pedido_tallas = [
+                    "id_prenda_pedido"=> $prendapedidotalla,
+                    "id_talla" => $tallas[$j]->id_talla,
+                    "cantidad" => $tallas[$j]->cantidad
+                ];
+                $this->PedidoModel->insertPrendasPedidoTallas($Prendas_pedido_tallas);
+                echo ('<br>');
+                echo ('Datos de tallas');
+                echo ('<br>');
+
+                echo $tallas[$j]->id_talla;
+                echo ('<br>');
+                echo $tallas[$j]->cantidad;
+                echo ('<br>');
+            }
+        }
+    }
 }
