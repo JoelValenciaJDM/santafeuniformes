@@ -123,7 +123,7 @@ class PedidoModel extends CI_Model
     {
         $this->db->insert('Prendas_pedido', $data);
     }
-    
+
     public function getlastId()
     {
         return $maxid = $this->db->query("SELECT max(id_pedido) as maxid FROM Pedido")->row();
@@ -133,6 +133,13 @@ class PedidoModel extends CI_Model
     {
         return $maxid = $this->db->query("SELECT max(id_prenda_pedido) as p FROM Prendas_pedido WHERE id_pedido = $id_pedido")->row();
     }
+
+    public function loadrollocorte($rollo_corte)
+    {
+        $this->db->insert('Rollos_corte', $rollo_corte);
+    }
+
+
 
 
     public function insertPrendasPedidoTallas($data)
