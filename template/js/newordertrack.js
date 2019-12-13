@@ -93,7 +93,7 @@ $("#newTalla").click(function (event) {
   // Original element with attached data
   // $("#newTalla").remove();
   console.log(`#idf${cloneCount - 1}` + " button:last");
-  document.getElementById("cantidad_tallas").value=cloneCount;
+  document.getElementById("cantidad_tallas").value = cloneCount;
   $("#id").clone().prop("id", 'idf' + cloneCount++).appendTo("#modalFabrica");
   // $(`#idf${cloneCount - 1}`).append('<button type="button" class="btn btn-danger mb-2 delete" id="delete">Eliminar</button>');
   // $(`#idf${cloneCount - 1}` + " .btnclss:last").after(funtion);
@@ -101,10 +101,10 @@ $("#newTalla").click(function (event) {
 
 $("#deleteTalla").click(function (event) {
   // Original element with attached data
-  document.getElementById("cantidad_tallas").value=cloneCount-2;
-  $(`#idf${cloneCount-1 }`).remove();
-  console.log(`#idf${cloneCount -1}`);
-  if(cloneCount>2){
+  document.getElementById("cantidad_tallas").value = cloneCount - 2;
+  $(`#idf${cloneCount - 1}`).remove();
+  console.log(`#idf${cloneCount - 1}`);
+  if (cloneCount > 2) {
     cloneCount--;
   }
 });
@@ -200,7 +200,6 @@ $("#deleteTallacompra").click(function (event) {
   if (cloneCountcompra > 2) {
     cloneCountcompra--;
   }
-
 });
 
 
