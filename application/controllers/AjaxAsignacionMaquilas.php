@@ -108,4 +108,24 @@ class AjaxAsignacionMaquilas extends CI_Controller
 
         }
     }
+    public function devolucion(){
+        $data = array(
+            'Fecha_actualizacion_entrega'=>$_POST['Fecha_actualizacion_entrega'],
+            'Entregas'=>$_POST['Entregas'],
+            'id_maquila_corte'=>$_POST['id_maquila_corte'],
+            'id_corte_prenda_pedido'=>$_POST['id_corte_prenda_pedido']
+        );
+        var_dump($data);
+        $this->AMModel->MaquilaCorteUpdate($data);
+    }
+
+    public function devolucionEnd(){
+        $data = array(
+            'id_maquila_corte'=>$_POST['id_maquila_corte'],
+            'Fecha_enrtrega' =>$_POST['Fecha_entrega'],
+            'status'=>1
+        );
+        var_dump($data);
+         $this->AMModel->MaquilaCorteUpdate($data);
+    }
 }

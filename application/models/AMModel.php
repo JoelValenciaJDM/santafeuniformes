@@ -43,7 +43,8 @@ class AMModel extends CI_Model
   }
   public function update_pedido_status_corte($id_corte)
   {
-      return $customers=$this->db->query("SELECT pp.id_pedido, Corte.status FROM Corte_prenda_pedido as cpp
+    return $customers = $this->db->query(
+      "SELECT pp.id_pedido, Corte.status FROM Corte_prenda_pedido as cpp
                                                        JOIN Corte ON cpp.id_corte = Corte.id_corte 
                                                        JOIN Prendas_pedido_tallas as ppt ON ppt.id_pedido_tallas = cpp.id_pedido_tallas
                                                        JOIN Prendas_pedido as pp ON pp.id_prenda_pedido =  ppt.id_prenda_pedido
@@ -53,8 +54,21 @@ class AMModel extends CI_Model
                                                        JOIN Prendas_pedido as pp ON pp.id_prenda_pedido =  ppt.id_prenda_pedido
                                                        WHERE Corte.id_corte = $id_corte                      
                                                        GROUP BY pp.id_pedido)"
-                                                      )->row();
+    )->row();
   }
-  
-}
 
+  public function getMaquilaEntrega()
+  {
+    return $data = json_encode($this->db->query("SELECT mc.id_maquila_corte, mc.id_corte_prenda_pedido, mc.id_maquila, mc.Cantidad, mc.Entregas, mc.Fecha_envio, mc.Fecha_tentativa_regreso, mc.Fecha_enrtrega, mc.Fecha_actualizacion_entrega, m.apodo 
+                                            FROM Maquila_corte as mc
+                                            JOIN Maquilas as m ON m.id_maquila = mc.id_maquila
+                                            WHERE mc.status = 0"
+                                            )->result_array());
+  }
+  public function MaquilaCorteUpdate($data)
+  {
+    $this->db->set($data);
+    $this->db->where('id_maquila_corte', $data['id_maquila_corte']);
+    return $this->db->update('Maquila_corte');
+  }
+}
