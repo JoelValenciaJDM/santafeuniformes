@@ -128,4 +128,47 @@ class AjaxAsignacionMaquilas extends CI_Controller
         var_dump($data);
          $this->AMModel->MaquilaCorteUpdate($data);
     }
+
+    public function pagoMaquila(){
+        $data_pay = $_POST['pay_data'];
+
+        date_default_timezone_set('America/Mexico_City');
+        echo date("Y m d");
+        $date = date("Y-m-d");
+
+        $data_load = array(
+            'maquila' => $_POST['maquila'],
+            'total'=>$_POST['granTotal'],
+            'date' => $date
+        );
+        var_dump($data_load);
+        
+        $this->AMModel->insertMaquilaPay($data_load);
+        $lastid=$this->AMModel->getlastId();
+
+
+
+
+        foreach ($data_pay as $dp){
+            $data = array(
+                'id_maquila_corte' => $dp['id_maquila_corte'],
+                'id_pago'=> $lastid->maxid,
+                'name' => $dp['name'],
+                'precio_tipo' => $dp['precio_tipo'],
+                'cantidad' => $dp['cantidad'],
+                'total' => $dp['total']
+            );
+
+            $dataUpdate= array(
+                'id_maquila_corte' => $dp['id_maquila_corte'],
+                'payed'=>1
+            );
+            echo ("<br>");
+            var_dump ($data);
+        $this->AMModel->updatePagoMaquila($dataUpdate);
+        
+        $this->AMModel->insertMaquilaPayDet($data);
+        }
+        
+    }
 }

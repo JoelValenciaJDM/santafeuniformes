@@ -33,7 +33,7 @@
 					<?php foreach ($Pedidos as $pedido) : ?>
 						<tr id="id<?= $pedido->id_pedido_tallas ?>">
 							<td class="d-md-table-cell d-none idCompuesto "><?= htmlentities($pedido->id_pedido . "-" . $pedido->id_prenda_pedido . "-" . $pedido->id_pedido_tallas) ?></td>
-							<td class="d-md-table-cell d-none"><?= htmlentities($pedido->Fecha_entrega) ?></td>
+							<td class="d-md-table-cell d-none"><?= htmlentities($pedido->Fecha_tentativa_entrega) ?></td>
 							<td class="d-md-table-cell d-none"><?= htmlentities($pedido->clase) ?></td>
 							<td class="d-md-table-cell d-none"><?= htmlentities($pedido->prenda) ?></td>
 							<td class="d-md-table-cell d-none"><?= htmlentities($pedido->tela) ?></td>

@@ -71,4 +71,36 @@ class AMModel extends CI_Model
     $this->db->where('id_maquila_corte', $data['id_maquila_corte']);
     return $this->db->update('Maquila_corte');
   }
+  public function pagosMaquila(){
+    return $data = json_encode($this->db->query("SELECT mc.id_maquila_corte, mc.id_maquila, m.apodo, p.id_prenda, p.name, tp.precio_tipo, mc.Cantidad
+                                                  FROM Maquila_corte as mc
+                                                    JOIN Corte_prenda_pedido as cpp ON cpp.id_corte_prenda_pedido = mc.id_corte_prenda_pedido
+                                                      JOIN Prendas_pedido_tallas as ppt ON ppt.id_pedido_tallas = cpp.id_pedido_tallas
+                                                        JOIN Prendas_pedido as pp ON pp.id_prenda_pedido = ppt.id_prenda_pedido
+                                                          JOIN Prendas as p ON p.id_prenda = pp.id_prenda
+                                                            JOIN Tipos_prendas as tp ON tp.id_tipo_prenda = p.id_tipos_prenda
+                                                              JOIN Maquilas as m ON mc.id_maquila = m.id_maquila
+                                                                WHERE payed = 0"
+                                                                )->result_array());
+  }
+
+  public function insertMaquilaPay($data)
+  {
+    $this->db->insert('maquila_pay', $data);
+  }
+  public function getlastId()
+  {
+      return $maxid = $this->db->query("SELECT max(id_pago) as maxid FROM maquila_pay")->row();
+  }
+
+  public function insertMaquilaPayDet($data)
+  {
+    $this->db->insert('pay_detalle', $data);
+  }
+  public function updatePagoMaquila($data)
+  {
+    $this->db->set($data);
+    $this->db->where('id_maquila_corte', $data['id_maquila_corte']);
+    return $this->db->update('Maquila_corte');
+  }
 }

@@ -131,15 +131,16 @@ public function updateCorte($dataupdate){
 
 
    public function pedidosPendientesCorte(){
-    return $customers=json_encode($this->db->query('SELECT  p.Fecha_entrega, pp.id_prenda_pedido, ppt.id_pedido_tallas, p.id_pedido, tp.name as clase, pren.name as prenda, c.name as color, tc.name as tono, tt.Nombre as tela, ppt.cantidad, t.Nombre as talla
+    return $customers=json_encode($this->db->query('SELECT  p.Fecha_entrega, pp.id_prenda_pedido, ppt.id_pedido_tallas, p.id_pedido, p.Fecha_tentativa_entrega, tp.name as clase, pren.name as prenda, c.name as color, tc.name as tono, tt.Nombre as tela, ppt.cantidad, t.Nombre as talla
                                                         FROM Prendas_pedido_tallas as ppt 
-                                                            JOIN Prendas_pedido as pp ON ppt.id_prenda_pedido = pp.id_prenda_pedido JOIN Pedido as p ON pp.id_pedido = p.id_pedido JOIN Prendas as pren on pp.id_prenda = pren.id_prenda 
-                                                                JOIN Tipos_prendas as tp ON pren.id_tipos_prenda = tp.id_tipo_prenda 
-                                                                    JOIN Tipo_telas as tt ON tt.id_tela = pp.id_tela 
-                                                                        JOIN colors as c ON c.id_color = pp.color 
-                                                                            JOIN Tela_colors as tc ON tc.id_tono = pp.colortela 
-                                                                                JOIN Tallas as t ON ppt.id_talla = t.id_talla
-                                                                                    WHERE ppt.status = 0
+                                                            JOIN Prendas_pedido as pp ON ppt.id_prenda_pedido = pp.id_prenda_pedido 
+                                                                JOIN Pedido as p ON pp.id_pedido = p.id_pedido JOIN Prendas as pren on pp.id_prenda = pren.id_prenda 
+                                                                    JOIN Tipos_prendas as tp ON pren.id_tipos_prenda = tp.id_tipo_prenda 
+                                                                        JOIN Tipo_telas as tt ON tt.id_tela = pp.id_tela 
+                                                                            JOIN colors as c ON c.id_color = pp.color 
+                                                                                JOIN Tela_colors as tc ON tc.id_tono = pp.colortela 
+                                                                                    JOIN Tallas as t ON ppt.id_talla = t.id_talla
+                                                                                         WHERE ppt.status = 0
                                                     ')->result_array());
    }
 

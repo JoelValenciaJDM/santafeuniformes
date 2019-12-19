@@ -182,7 +182,7 @@ class AjaxCorte extends CI_Controller
             'id_corte_prenda_pedido' => $id_cpp->id_corte_prenda_pedido
         );
 
-        $this->CorteModel->createCorteMaquila($data);
+        // $this->CorteModel->createCorteMaquila($data);
 
 
         
