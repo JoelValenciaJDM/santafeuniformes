@@ -41,6 +41,23 @@ class AsignacionMaquila extends CI_Controller
     $data = array_merge($data, $this->CpanelModel->loadData());
     $this->load->view('sscm/AsignacionMaquilas/PagoMaquilas', $data);
   }
+
+  public function revision ()
+  {
+    $data['fallos'] = json_decode($this->AMModel->fallos());
+    // echo ($this->TelaModel->loadTelas());
+    $data = array_merge($data, $this->CpanelModel->loadData());
+    $this->load->view('sscm/AsignacionMaquilas/Revision', $data);
+  }
+
+  public function arreglado ()
+  {
+    $data['arreglados'] = json_decode($this->AMModel->getArreglos());
+    // echo ($this->TelaModel->loadTelas());
+    $data = array_merge($data, $this->CpanelModel->loadData());
+    $this->load->view('sscm/AsignacionMaquilas/Arreglado', $data);
+  }
+
 }
 
 /* End of file AsignacionMaquila.php */

@@ -19,7 +19,8 @@ class AjaxAsignacionMaquilas extends CI_Controller
         $this->load->model('AMModel');
     }
     public function index()
-    { }
+    {
+    }
 
     public function ajaxcpp()
     {
@@ -59,16 +60,15 @@ class AjaxAsignacionMaquilas extends CI_Controller
             );
             var_dump($update_data);
             $this->CorteModel->updatePedidoStatus($update_data);
-
-
         }
     }
-    public function ajaxcppMulti(){
+    public function ajaxcppMulti()
+    {
         // var_dump($_POST['maquila']);
         $maquilas = $_POST['maquila'];
 
-        for ($i=0; $i < sizeof($maquilas); $i++) { 
-            $maquilasIndividual=$maquilas[$i];
+        for ($i = 0; $i < sizeof($maquilas); $i++) {
+            $maquilasIndividual = $maquilas[$i];
 
 
             $data = array(
@@ -102,34 +102,49 @@ class AjaxAsignacionMaquilas extends CI_Controller
             );
             var_dump($update_data);
             $this->CorteModel->updatePedidoStatus($update_data);
-
-
-
-
         }
     }
-    public function devolucion(){
+    public function devolucion()
+    {
         $data = array(
-            'Fecha_actualizacion_entrega'=>$_POST['Fecha_actualizacion_entrega'],
-            'Entregas'=>$_POST['Entregas'],
-            'id_maquila_corte'=>$_POST['id_maquila_corte'],
-            'id_corte_prenda_pedido'=>$_POST['id_corte_prenda_pedido']
+            'Fecha_actualizacion_entrega' => $_POST['Fecha_actualizacion_entrega'],
+            'Entregas' => $_POST['Entregas'],
+            'id_maquila_corte' => $_POST['id_maquila_corte'],
+            'id_corte_prenda_pedido' => $_POST['id_corte_prenda_pedido']
         );
         var_dump($data);
         $this->AMModel->MaquilaCorteUpdate($data);
     }
 
-    public function devolucionEnd(){
+    public function devolucionEnd()
+    {
         $data = array(
-            'id_maquila_corte'=>$_POST['id_maquila_corte'],
-            'Fecha_enrtrega' =>$_POST['Fecha_entrega'],
-            'status'=>1
+            'id_maquila_corte' => $_POST['id_maquila_corte'],
+            'Fecha_enrtrega' => $_POST['Fecha_entrega'],
+            'status' => 1
         );
+
+        // HAY QUE ACTUALIZAR PARA QUE SE VEA EL PEDIDO EN DONDE SE ENCUENTRA
+
+        $result = $this->AMModel->getidPedido($_POST['id_maquila_corte']);
+        date_default_timezone_set('America/Mexico_City');
+        echo date("Y m d");
+        $update_date = date("Y-m-d");
+
+        $update_data = array(
+            'id_pedido' => $result->id_pedido,
+            'Fecha_update' => $update_date,
+            'status' => 18
+        );
+        var_dump($update_data);
+        $this->CorteModel->getidPedido($update_data);
+
         var_dump($data);
-         $this->AMModel->MaquilaCorteUpdate($data);
+        $this->AMModel->MaquilaCorteUpdate($data);
     }
 
-    public function pagoMaquila(){
+    public function pagoMaquila()
+    {
         $data_pay = $_POST['pay_data'];
 
         date_default_timezone_set('America/Mexico_City');
@@ -138,37 +153,88 @@ class AjaxAsignacionMaquilas extends CI_Controller
 
         $data_load = array(
             'maquila' => $_POST['maquila'],
-            'total'=>$_POST['granTotal'],
+            'total' => $_POST['granTotal'],
             'date' => $date
         );
         var_dump($data_load);
-        
+
         $this->AMModel->insertMaquilaPay($data_load);
-        $lastid=$this->AMModel->getlastId();
+        $lastid = $this->AMModel->getlastId();
 
 
 
 
-        foreach ($data_pay as $dp){
+        foreach ($data_pay as $dp) {
             $data = array(
                 'id_maquila_corte' => $dp['id_maquila_corte'],
-                'id_pago'=> $lastid->maxid,
+                'id_pago' => $lastid->maxid,
                 'name' => $dp['name'],
                 'precio_tipo' => $dp['precio_tipo'],
                 'cantidad' => $dp['cantidad'],
                 'total' => $dp['total']
             );
 
-            $dataUpdate= array(
+            $dataUpdate = array(
                 'id_maquila_corte' => $dp['id_maquila_corte'],
-                'payed'=>1
+                'payed' => 1
             );
             echo ("<br>");
-            var_dump ($data);
-        $this->AMModel->updatePagoMaquila($dataUpdate);
-        
-        $this->AMModel->insertMaquilaPayDet($data);
+            var_dump($data);
+            $this->AMModel->updatePagoMaquila($dataUpdate);
+
+            $this->AMModel->insertMaquilaPayDet($data);
         }
-        
+    }
+
+    public function nofallas()
+    {
+        $data = array(
+            'id_maquila_corte' => $_POST['id_mc'],
+            'status' => 1
+        );
+
+        $this->AMModel->createMaquilaRevision($data);
+        //Hay que crear el modal para agregar prendas faltantes...y finalmente hacer un modulo de rastreo (Que en teoria es lo mas senciollo)
+    }
+
+
+    public function fallas()
+    {
+
+        date_default_timezone_set('America/Mexico_City');
+        echo date("Y m d");
+        $date = date("Y-m-d");
+
+        $data = array(
+            'id_maquila_corte' => $_POST['id_mc'],
+            'send_date' => $date,
+            'fallas' => $_POST['cantidad'],
+            'status' => 0
+        );
+
+        var_dump($data);
+
+        $this->AMModel->createMaquilaRevision($data);
+        //Hay que crear el modal para agregar prendas faltantes...y finalmente hacer un modulo de rastreo (Que en teoria es lo mas senciollo)
+    }
+
+    public function arregladas()
+    {
+
+        date_default_timezone_set('America/Mexico_City');
+        echo date("Y m d");
+        $date = date("Y-m-d");
+
+        $data = array(
+            'id_maquila_corte' => $_POST['id_mc'],
+            'send_date' => $date,
+            'fallas' => $_POST['cantidad'],
+            'status' => 1
+        );
+
+        var_dump($data);
+
+        $this->AMModel->updateMaquilaRevision($data);
+        //Hay que crear el modal para agregar prendas faltantes...y finalmente hacer un modulo de rastreo (Que en teoria es lo mas senciollo)
     }
 }

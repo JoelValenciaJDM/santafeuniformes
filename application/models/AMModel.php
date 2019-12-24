@@ -103,4 +103,43 @@ class AMModel extends CI_Model
     $this->db->where('id_maquila_corte', $data['id_maquila_corte']);
     return $this->db->update('Maquila_corte');
   }
+  public function fallos(){
+    return $fallos = json_encode($this->db->query("SELECT mc.id_maquila_corte, cpp.id_corte_prenda_pedido,  m.apodo, mc.id_maquila_corte, mc.Cantidad, mc.Fecha_enrtrega, p.name 
+                                        FROM Maquila_corte as mc
+                                          JOIN Maquilas as m ON m.id_maquila = mc.id_maquila
+                                            JOIN Corte_prenda_pedido as cpp ON cpp.id_corte_prenda_pedido = mc.id_corte_prenda_pedido
+                                              JOIN Prendas_pedido_tallas as ppt ON ppt.id_pedido_tallas = cpp.id_pedido_tallas
+                                                JOIN Prendas_pedido as pp ON pp.id_prenda_pedido = ppt.id_prenda_pedido
+                                                  JOIN Prendas as p ON p.id_prenda = pp.id_prenda 
+                                                    WHERE mc.payed = 1")->result_array()); 
+  }
+
+  public function getidPedido($id_cpp){
+    return $pedido = $this->db->query("SELECT pp.id_pedido, mc.id_maquila_corte
+                                        FROM Maquila_corte as mc
+                                          JOIN  Corte_prenda_pedido as cpp ON mc.id_corte_prenda_pedido = cpp.id_corte_prenda_pedido
+                                            JOIN Maquilas as m ON m.id_maquila = mc.id_maquila
+                                              JOIN Corte ON cpp.id_corte = Corte.id_corte 
+                                                JOIN Prendas_pedido_tallas as ppt ON ppt.id_pedido_tallas = cpp.id_pedido_tallas
+                                                  JOIN Prendas_pedido as pp ON pp.id_prenda_pedido =  ppt.id_prenda_pedido
+                                                    WHERE mc.id_maquila_corte = $id_cpp");
+  }
+  public function createMaquilaRevision($data){
+    $this->db->insert('maquila_revision', $data);
+  } 
+
+  public function getArreglos()
+  {
+    return $arreglos = json_encode($this->db->query("SELECT * FROM maquila_revision as mr
+                                                      JOIN Maquila_corte as mc ON mr.id_maquila_corte = mc.id_maquila_corte
+                                                        JOIN Maquilas as m ON m.id_maquila = mc.id_maquila
+                                                          where mr.status = 0")->result_array());
+  }
+
+  public function updateMaquilaRevision($data)
+  {
+    $this->db->set($data);
+    $this->db->where('id_maquila_corte', $data['id_maquila_corte']);
+    return $this->db->update('maquila_revision');
+  }
 }
